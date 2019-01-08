@@ -1,17 +1,1 @@
 itest: Integration test
-spring:
-  datasource:
-    hikari:
-      connection-test-query: SELECT 1 FROM SYSIBM.SYSDUMMY1
-    url: jdbc:db2://192.168.99.100:50000/CRIMINAL:currentSchema=AUTO;retrieveMessagesFromServerOnGetMessage=true;driverType=4;
-    username: db2inst1
-    password: db2inst1-pwd
-    driver-class-name: com.ibm.db2.jcc.DB2Driver
-  jpa:
-    database-platform: org.hibernate.dialect.DB2400Dialect
-    database: DB2
-    show-sql: true
-    properties:
-      hibernate.cache.use_second_level_cache: false
-      hibernate.cache.use_query_cache: false
-      hibernate.generate_statistics: false

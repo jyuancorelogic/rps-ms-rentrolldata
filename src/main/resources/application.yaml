@@ -6,15 +6,15 @@
 spring:
   datasource:
            hikari:   # Set here configurations for the database connection
-                    connection-test-query: SELECT 1 FROM SYSIBM.SYSDUMMY1
-           url: jdbc:as400://10.212.33.151/AUTO
-           username: weblogin
-           password: jlo98765
-           driver-class-name: com.ibm.as400.access.AS400JDBCDriver
+                    connection-test-query:
+           url: 
+           username: 
+           password: 
+           driver-class-name: 
   jpa:
-        database-platform: org.hibernate.dialect.DB2400Dialect
-        database: DB2
-        show-sql: true
+        database-platform: 
+        database: 
+        show-sql: 
         properties:
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
