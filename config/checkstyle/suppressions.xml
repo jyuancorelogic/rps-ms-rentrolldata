@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+        "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+        "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+    <!-- Tone down the checking for test code -->
+    <suppress checks="EmptyBlock" files=".*[\\/]src[\\/]test[\\/]"/>
+    <suppress checks="ImportControl" files=".*[\\/]src[\\/](test|it)[\\/]"/>
+    <suppress checks="Javadoc" files=".*[\\/]src[\\/](test|it)[\\/]"/>
+    <suppress checks="MagicNumber" files=".*[\\/]src[\\/](test|it)[\\/]"/>
+    <suppress checks="AvoidStaticImport" files=".*[\\/]src[\\/](test|it)[\\/]"/>
+    <suppress checks="MethodCount" files="[\\/]ImportOrderCheckTest.java$"/>
+    <suppress checks="MethodCount" files="[\\/]IndentationCheckTest.java$"/>
+    <suppress checks="MethodCount" files="[\\/]JavadocMethodCheckTest.java$"/>
+    <suppress checks="MethodCount" files="[\\/]MainTest.java$"/>
+    <suppress checks="EqualsAvoidNull" files="[\\/]Int.*FilterTest.java$"/>
+    <suppress checks="VisibilityModifier" files="[\\/]BaseCheckTestSupport.java$"/>
+    <suppress checks="WriteTag" files=".*[\\/]src[\\/](test|it)[\\/]"/>
+
+    <!--Classes FileDrop, Main, ParseTreeInfoPanel from gui-package contain Magic Numbers.
+    The Check generates too many violations, fixing them will make code unmanageable.-->
+    <suppress checks="MagicNumber" files=".*[\\/]checkstyle[\\/]gui[\\/]"/>
+
+    <!-- Methods that build fake AST are very long-->
+    <suppress checks="MethodLength" files="src[\\/]test[\\/]java[\\/]com[\\/]puppycrawl[\\/]tools[\\/]checkstyle[\\/]grammars[\\/]comments[\\/]CommentsTest\.java"/>
+    <suppress checks="ExecutableStatementCount" files="src[\\/]test[\\/]java[\\/]com[\\/]puppycrawl[\\/]tools[\\/]checkstyle[\\/]grammars[\\/]comments[\\/]CommentsTest\.java"/>
+    <suppress checks="JavaNCSS" files="src[\\/]test[\\/]java[\\/]com[\\/]puppycrawl[\\/]tools[\\/]checkstyle[\\/]grammars[\\/]comments[\\/]CommentsTest\.java"/>
+
+    <suppress checks="." files=".*JavadocTokenTypes\.java"/>
+    <suppress checks="." files=".*ParseTreeBuilder\.java"/>
+
+    <!-- Till https://github.com/checkstyle/checkstyle/issues/1854 -->
+    <suppress checks="TrailingComment" files="(InnerAssignmentCheck\.java|OperatorWrapCheck\.java|XMLLoggerTest\.java|AbbreviationAsWordInNameCheckTest\.java)"/>
+
+    <suppress checks="MultipleStringLiterals" files=".*[\\/]src[\\/](test|it)[\\/]"/>
+
+    <!-- There are a lot of setters/getters in the Check. A small number of methods is left for Check's logic -->
+    <suppress checks="MethodCount" files="[\\/]JavadocMethodCheck.java$"/>
+</suppressions>

@@ -1,0 +1,127 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.1.RELEASE'
+		liquibasepluginVersion = '1.2.4'
+        dockerPluginVersion = '1.2'
+        db2jccDriverVersion = '10.1'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://repo.corelogic.net/nexus/content/repositories/m2/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("se.transmode.gradle:gradle-docker:${dockerPluginVersion}")
+ 		classpath "org.liquibase:liquibase-gradle-plugin:${liquibasepluginVersion}"
+        classpath "com.ibm.db2.jcc:db2jcc4:${db2jccDriverVersion}"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+apply plugin: 'docker'
+apply plugin: 'org.liquibase.gradle'
+apply plugin: 'jacoco'
+
+group = 'com.corelogic.rps'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://repo.corelogic.net/nexus/content/repositories/m2/"
+    }
+}
+
+ext {
+    wiremock = '2.11.0'
+    checkstyleSevntu = '1.24.2'
+    swagger = '2.8.0'
+    db2jccDriverVersion = '10.1'
+    db2DriverVersion = '9.4'
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("io.springfox:springfox-swagger2:${swagger}")
+    compile("io.springfox:springfox-swagger-ui:${swagger}")
+    compile("com.gemstone.gemfire:gemfire:8.2.4")
+    compile ("com.ancientprogramming.fixedformat4j:fixedformat4j:1.2.2")
+    annotationProcessor("org.projectlombok:lombok:1.16.20")
+    compileOnly("org.projectlombok:lombok:1.16.20")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("org.mockito:mockito-core:2.18.3")
+    testCompile("com.h2database:h2:1.0.60")
+    checkstyle("com.github.sevntu-checkstyle:sevntu-checks:${checkstyleSevntu}")
+    runtime("org.springframework.boot:spring-boot-properties-migrator")
+}
+
+pmd {
+    ruleSetFiles = files("config/pmd/pmd-ruleset.xml")
+}
+
+findbugs {
+    excludeFilter = file("config/findbugs/excludeFilter.xml")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.7'
+}
+
+sourceSets {
+    itest {
+        java.srcDir 'src/itest/java'
+        resources.srcDir 'src/itest/resources'
+        compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output
+    }
+}
+
+configurations {
+    itestCompile.extendsFrom testCompile
+    itestRuntime.extendsFrom testRuntime
+}
+
+
+task itest(type: Test, dependsOn: update) {
+    group 'Verification'
+    description 'Runs the integration tests'
+    testClassesDirs = sourceSets.itest.output.classesDirs
+    classpath = sourceSets.itest.runtimeClasspath
+}
+
+// Jacoco section
+
+jacoco {
+    toolVersion = "0.8.1"
+}
+
+itest.finalizedBy(project.tasks.jacocoTestReport)
+
+def jacocoTestFiles = ["$buildDir/jacoco/test.exec", "$buildDir/jacoco/itest.exec"]
+jacocoTestReport.dependsOn(project.tasks.test, project.tasks.itest)
+jacocoTestReport.executionData(jacocoTestFiles)
+
+if (project.hasProperty("skipall")) {
+    gradle.startParameter.excludedTaskNames += "test"
+    gradle.startParameter.excludedTaskNames += "findbugsMain"
+    gradle.startParameter.excludedTaskNames += "findbugsTest"
+    gradle.startParameter.excludedTaskNames += "pmdItest"
+    gradle.startParameter.excludedTaskNames += "pmdMain"
+    gradle.startParameter.excludedTaskNames += "pmdTest"
+    gradle.startParameter.excludedTaskNames += "checkstyleItes"
+    gradle.startParameter.excludedTaskNames += "checkstyleMain"
+    gradle.startParameter.excludedTaskNames += "checkstyleTest"
+    gradle.startParameter.excludedTaskNames += "compileItestJava"
+    gradle.startParameter.excludedTaskNames += "compileTestJava"
+
+}
