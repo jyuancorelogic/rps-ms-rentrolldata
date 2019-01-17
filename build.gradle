@@ -34,9 +34,9 @@ apply plugin: 'docker'
 apply plugin: 'org.liquibase.gradle'
 apply plugin: 'jacoco'
 
-group = 'com.corelogic.rps'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+
+archivesBaseName = 'rentrolldata'
 
 repositories {
     mavenCentral()
