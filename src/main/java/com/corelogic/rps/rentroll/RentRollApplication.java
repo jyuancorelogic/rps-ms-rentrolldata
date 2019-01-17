@@ -10,6 +10,7 @@
  * consequences arising from the use of this software except as otherwise stated in
  * the terms of the license.
  */
+
 package com.corelogic.rps.rentroll;
 
 import org.springframework.boot.SpringApplication;
