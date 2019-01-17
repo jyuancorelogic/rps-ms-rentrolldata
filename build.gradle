@@ -36,7 +36,9 @@ apply plugin: 'jacoco'
 
 sourceCompatibility = 1.8
 
-archivesBaseName = 'rentrolldata'
+jar {
+  baseName = 'rentrolldata'
+}
 
 repositories {
     mavenCentral()
