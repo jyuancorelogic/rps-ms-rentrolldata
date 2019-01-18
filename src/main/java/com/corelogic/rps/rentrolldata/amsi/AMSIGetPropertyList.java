@@ -21,12 +21,13 @@ public class AMSIGetPropertyList {
 		String result="";
 		try {
 		URL urladdress = new URL(url);
-		 LeasingSoap port = getProxy(urladdress);
-		//LeasingSoap leasesoap=leasing.getLeasingSoap();
+		LeasingSoap port = getProxy(urladdress);
 		result=port.getPropertyList("fasrclk", "fasrclk", "esite clk", "");
-		
+		if(result!=null){
 		log.info("result"+result);
+		}
 		}catch(MalformedURLException e){
+			log.info("MalformedURLException"+e);
 			
 		}
 		

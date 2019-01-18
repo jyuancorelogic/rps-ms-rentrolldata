@@ -16,11 +16,11 @@ package com.corelogic.rps.rentrolldata;
 
 
 
-import java.net.MalformedURLException;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import com.corelogic.rps.rentrolldata.amsi.AMSIGetPropertyList;
+
 
 
 
@@ -31,14 +31,6 @@ public class RentRollApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(RentRollApplication.class, args);
-        AMSIGetPropertyList aim= new AMSIGetPropertyList();
-        try {
-			aim.getPropertyListAMSI();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
         
     }
 }
