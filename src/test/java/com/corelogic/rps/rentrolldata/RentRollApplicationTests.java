@@ -11,7 +11,7 @@
  * the terms of the license.
  */
 
-package com.corelogic.rps.rentroll;
+package com.corelogic.rps.rentrolldata;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
