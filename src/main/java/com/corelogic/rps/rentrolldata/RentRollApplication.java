@@ -11,7 +11,7 @@
  * the terms of the license.
  */
 
-package com.corelogic.rps.rentroll;
+package com.corelogic.rps.rentrolldata;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

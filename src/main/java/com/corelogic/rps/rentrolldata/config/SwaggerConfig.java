@@ -11,7 +11,7 @@
  * the terms of the license.
  */
 
-package com.corelogic.rps.rentroll.config;
+package com.corelogic.rps.rentrolldata.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
