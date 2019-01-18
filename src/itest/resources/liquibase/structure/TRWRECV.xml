@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="mkotha" id="CREATE_TRWRECV" failOnError="true">
+        <comment>Experian Raw Data File</comment>
+        <createTable tableName="TRWRECV" schemaName="AUTO">
+            <column name="RECVINV" type="char(8)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RECVDATA" type="varchar(8000)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

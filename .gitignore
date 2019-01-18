@@ -1,0 +1,30 @@
+.gradle
+/build/
+/out/
+/bin/
+!gradle/wrapper/gradle-wrapper.jar
+schema/
+src/main/java/com/corelogic/rps/rentrolldata/amsi/generated/
+
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/

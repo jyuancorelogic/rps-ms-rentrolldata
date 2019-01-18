@@ -1,40 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration strict="true" status="WARN">
+<!--
+  ~ Copyright (c) 2018 CoreLogic, Inc. All Rights Reserved.
+  ~
+  ~ This software is the confidential and proprietary information of CoreLogic, Inc.
+  ~ It is furnished under license and may only be used or copied in accordance
+  ~ with the terms of such license.
+  ~ This software is subject to change without notice and no information
+  ~ contained in it should be construed as commitment by CoreLogic, Inc.
+  ~ CoreLogic, Inc. cannot accept any responsibility, financial or otherwise, for any
+  ~ consequences arising from the use of this software except as otherwise stated in
+  ~ the terms of the license.
+  -->
+
+<Configuration status="warn">
     <Properties>
-        <property name="logging.dir">D:\apps\logs\rentrolldata</property>
-        <property name="log.level">debug</property>
-        <property name="filename.pattern">rentrolldata</property>
-        <property name="file.pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} - %level | [%t] | %C{-10} :: %M - %m %ex%n</property>
-        <property name="console.pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} - %highlight{%level | [%t] | %C{-10} :: %M - %m %ex%n}
-        </property>
+        <property name="log.dir">/apps/logs/rentrolldata</property>
+        <Property name="log.filename">rentrolldata.log</Property>
+        <Property name="log.archive.dir">/apps/logs/rentrolldata/archived</Property>
     </Properties>
-
     <Appenders>
-        <Appender type="Console" name="STDOUT">
-            <Layout type="PatternLayout">
-                <pattern>${console.pattern}</pattern>
-            </Layout>
-        </Appender>
-
-        <RollingFile name="FILE"
-                     fileName="${logging.dir}/${filename.pattern}.log"
-                     filePattern="${logging.dir}/backup/${filename.pattern}/$${date:yyyy-MM}/${filename.pattern}-%d{ddMMyyyy}-%i.log.gz"
-                     ignoreExceptions="false">
-            <PatternLayout>
-                <Pattern>${file.pattern}</Pattern>
-            </PatternLayout>
+        <Console name="stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d [%-16.16t %16.-16c~%-32.32c, %-5p]   %-160msg   %l%n"/>
+        </Console>
+        <RollingRandomAccessFile name="file" fileName="${log.dir}/${log.filename}"
+                                 filePattern="${log.archive.dir}/%d{yyyyMMdd}-${log.filename}.zip" ignoreExceptions="false">
+            <PatternLayout pattern="%d [%-16.16t %c{8.16} %32.32c %-5p]   %-160msg   %l%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="25 MB"/>
             </Policies>
-            <DefaultRolloverStrategy max="20"/>
-        </RollingFile>
+        </RollingRandomAccessFile>
     </Appenders>
-
     <Loggers>
-        <Root level="${log.level}">
-            <AppenderRef ref="STDOUT"/>
-            <AppenderRef ref="FILE"/>
+        <Root level="info">
+            <AppenderRef ref="stdout"/>
+            <AppenderRef ref="file"/>
         </Root>
+        <Logger name="org.apache" level="info"/>
+        <Logger name="org.springframework" level="info"/>
+        <Logger name="org.springframework.security" level="info"/>
+        <Logger name="org.hibernate" level="info"/>
+        <Logger name="org.hibernate.SQL" level="info"/>
+        <Logger name="org.hibernate.type" level="info"/>
+        <Logger name="com.corelogic.rps.rentrolldata" level="info"/>
+
+        <logger name="org.springframework.ws.client.MessageTracing" level="info"/>
+        <logger name="org.springframework.ws.server.MessageTracing" level="info"/>
+
     </Loggers>
 </Configuration>
