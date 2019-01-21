@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="mkotha" id="TRWRECV_DATA" failOnError="true">
+        <loadData encoding="UTF-8"
+                  file="src/itest/resources/liquibase/data/csv/TRWRECV.csv"
+                  quotchar="&quot;"
+                  schemaName="AUTO"
+                  separator=","
+                  tableName="TRWRECV">
+            <column name="RECVINV" type="STRING"/>
+            <column name="RECVDATA" type="STRING"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

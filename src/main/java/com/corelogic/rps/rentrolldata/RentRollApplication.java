@@ -13,14 +13,24 @@
 
 package com.corelogic.rps.rentrolldata;
 
+
+
+
+
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
+
+
 @SpringBootApplication
 public class RentRollApplication {
+	
+
 
     public static void main(String[] args) {
-    //	System.out.println("testing my gradle project");
         SpringApplication.run(RentRollApplication.class, args);
+        
     }
 }
