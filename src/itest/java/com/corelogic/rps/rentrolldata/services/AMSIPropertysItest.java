@@ -31,7 +31,7 @@ public class AMSIPropertysItest {
     @Test
     public void getPropertyListAMSItest() throws MalformedURLException{
      String result="";
-		result = amsiproperty.getPropertyListAMSI();
+		result = amsiproperty.getPropertyListAMSI(null);
 	
         Assertions.assertThat(result.length()).isGreaterThan(0);
     }

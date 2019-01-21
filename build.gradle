@@ -35,11 +35,9 @@ apply plugin: 'org.liquibase.gradle'
 apply plugin: 'jacoco'
 apply plugin :'no.nils.wsdl2java'
 
+group = 'com.corelogic.rps'
+version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
-
-jar {
-  baseName = 'rentrolldata'
-}
 
 repositories {
     mavenCentral()
@@ -59,6 +57,7 @@ ext {
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-actuator")
+    //compile("org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}")
     compile("io.springfox:springfox-swagger2:${swagger}")
     compile("io.springfox:springfox-swagger-ui:${swagger}")
     compile("com.gemstone.gemfire:gemfire:8.2.4")
@@ -97,6 +96,10 @@ findbugs {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.7'
+}
+
+tasks.withType(Pmd) {
+    exclude '**/generated/**'
 }
 
 sourceSets {
