@@ -3,45 +3,40 @@ package com.corelogic.rps.rentrolldata.amsi;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.springframework.stereotype.Component;
 
-import com.corelogic.rps.rentrolldata.amsi.generated.Leasing;
 import com.corelogic.rps.rentrolldata.amsi.generated.LeasingSoap;
 
 import lombok.extern.log4j.Log4j2;
 @Log4j2
 
+@Component
 public class AMSIGetPropertyList {
+	   
 	
+   public String  getPropertyListAMSI(AMSIInputs inputs) throws MalformedURLException{			
+		   String result="";
+		   try {
+			   log.info(inputs.getUrl());
+			   URL urladdress = new URL(inputs.getUrl());
+			   LeasingSoap port = AMSIUtil.getProxy(urladdress);
+			   result=port.getPropertyList(inputs.getUsername(), inputs.getPassword(), inputs.getPortfolio(), "");
+				if(log.isInfoEnabled()){
+				   log.info("result"+result);
+			   }
+		   }catch(MalformedURLException e){
+				if(log.isInfoEnabled()){
+				   log.info("MalformedURLException"+e);
+				   }
 
-	Leasing leasing=new Leasing();
-	private static String url="http://www.clk-pm.net/AMSIweb/edexweb/esite/leasing.asmx";
-	
-	public String  getPropertyListAMSI() throws MalformedURLException{
-		
-		String result="";
-		try {
-		URL urladdress = new URL(url);
-		LeasingSoap port = getProxy(urladdress);
-		result=port.getPropertyList("fasrclk", "fasrclk", "esite clk", "");
-		if(result!=null){
-		log.info("result"+result);
-		}
-		}catch(MalformedURLException e){
-			log.info("MalformedURLException"+e);
-			
-		}
-		
-		return result;	
+		   }
 
-		
-	}
-	
-    private  LeasingSoap getProxy(URL Urllcl){
-    	LeasingSoap leasesoap=leasing.getLeasingSoap();
+		   return result;	
 
-                        return leasesoap;
-            }
+
+	   }
 	
+   
 	
 
 }
