@@ -13,7 +13,7 @@ import lombok.extern.log4j.Log4j2;
 @Component
 public class AMSIPropertyUnits {
 	
-	public String  getPropertyUnits(AMSIInputs inputs) throws MalformedURLException{			
+	public String  getPropertyUnits(AMSIInputs inputs) {			
 		String result="";
 		try {
 			URL urladdress = new URL(inputs.getUrl());

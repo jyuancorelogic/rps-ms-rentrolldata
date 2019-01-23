@@ -15,7 +15,7 @@ import lombok.extern.log4j.Log4j2;
 public class AMSIResidents {
 
 	
-   public String  getResidentsByStatusChangeOrTransactionDateForResidents(AMSIInputs inputs) throws MalformedURLException{			
+   public String  getResidentsByStatusChangeOrTransactionDateForResidents(AMSIInputs inputs) {			
 	   String result="";
 	   try {
 		   URL urladdress = new URL(inputs.getUrl());

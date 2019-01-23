@@ -14,7 +14,7 @@ import lombok.extern.log4j.Log4j2;
 public class AMSIGetPropertyList {
 	   
 	
-   public String  getPropertyListAMSI(AMSIInputs inputs) throws MalformedURLException{			
+   public String  getPropertyListAMSI(AMSIInputs inputs) {			
 		   String result="";
 		   try {
 			   log.info(inputs.getUrl());

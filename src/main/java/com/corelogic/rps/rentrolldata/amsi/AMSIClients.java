@@ -13,7 +13,7 @@ import lombok.extern.log4j.Log4j2;
 @Component
 public class AMSIClients {
 	
-   public String  getResidentsByStatusChangeOrTransactionDateForClients(AMSIInputs inputs) throws MalformedURLException{			
+   public String  getResidentsByStatusChangeOrTransactionDateForClients(AMSIInputs inputs){			
 	   String result="";
 	   try {
 		   URL urladdress = new URL(inputs.getUrl());

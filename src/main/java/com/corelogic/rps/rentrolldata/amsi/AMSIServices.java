@@ -1,6 +1,5 @@
 package com.corelogic.rps.rentrolldata.amsi;
 
-import java.net.MalformedURLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,20 +17,19 @@ public class AMSIServices {
 	AMSIPropertyResidents propertyResidents;
 	@Autowired
 	AMSIResidents residents;
-	@Autowired 
-	AMSIInputs inputs;
-	@Autowired 
-	AMSIInputs inputforresident;
+
+
+
 	
 	private static final String fasrclk="fasrclk";
 	
 
-	public boolean executeAMSIServices() throws MalformedURLException{
+	public boolean executeAMSIServices() {
 		boolean result =false;
 		String propResidentlList="";
 		String propertyunits="";
 		String residentslist="";
-
+		AMSIInputs inputs=new AMSIInputs();
 		inputs.setUrl("http://www.clk-pm.net/AMSIweb/edexweb/esite/leasing.asmx");
 		inputs.setUsername(fasrclk);
 		inputs.setPassword(fasrclk);
@@ -42,6 +40,7 @@ public class AMSIServices {
 						inputs.setPropertyId("626");
 			propertyunits=propertyUnits.getPropertyUnits(inputs);
 			propResidentlList=propertyResidents.getPropertyResidents(inputs);
+			AMSIInputs inputforresident=new AMSIInputs();
 			inputforresident.setUrl("http://www.clk-pm.net/AMSIweb/edexweb/esite/leasing.asmx");
 			inputforresident.setUsername(fasrclk);
 			inputforresident.setPassword(fasrclk);

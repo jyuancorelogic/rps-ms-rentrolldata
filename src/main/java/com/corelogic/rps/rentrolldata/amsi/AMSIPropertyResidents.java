@@ -16,7 +16,7 @@ public class AMSIPropertyResidents {
 
    
 	
-   public String  getPropertyResidents(AMSIInputs inputs) throws MalformedURLException{			
+   public String  getPropertyResidents(AMSIInputs inputs) {			
 	   String result="";
 	   try {
 		   URL urladdress = new URL(inputs.getUrl());

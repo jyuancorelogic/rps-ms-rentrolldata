@@ -56,8 +56,7 @@ ext {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-actuator")
-    //compile("org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-actuator")   
     compile("io.springfox:springfox-swagger2:${swagger}")
     compile("io.springfox:springfox-swagger-ui:${swagger}")
     compile("com.gemstone.gemfire:gemfire:8.2.4")
@@ -69,11 +68,16 @@ dependencies {
     testCompile("com.h2database:h2:1.0.60")
     checkstyle("com.github.sevntu-checkstyle:sevntu-checks:${checkstyleSevntu}")
     runtime("org.springframework.boot:spring-boot-properties-migrator")
+    compile ("aopalliance:aopalliance:1.0")
+    compile ("org.aspectj:aspectjrt:1.8.9")
+    compile ("org.aspectj:aspectjweaver:1.8.9")
+    compile ("cglib:cglib-nodep:3.1")
 
 }
 
 wsdl2java{
     wsdlsToGenerate = [
+//    ['-p','com.corelogic.rps.rentrolldata.yardi.generated', '-autoNameResolution',"$projectDir/src/main/resources/wsdl/ItfRentersinsurance.wsdl"],
             ['-p','com.corelogic.rps.rentrolldata.amsi.generated', '-autoNameResolution',"$projectDir/src/main/resources/wsdl/leasing.wsdl"]
     ]
     generatedWsdlDir = file("$projectDir/src/main/java/")
