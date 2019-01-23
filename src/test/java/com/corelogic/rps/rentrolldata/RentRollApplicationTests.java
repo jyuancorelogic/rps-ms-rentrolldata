@@ -64,4 +64,9 @@ public class RentRollApplicationTests {
     public void applicationContextTest() {
         RentRollApplication.main(new String[] {});
     }
+    
+    @Test
+    public void amsiservices() {
+    	aim.executeAMSIServices();
+    }
 }

@@ -23,8 +23,8 @@ public class AMSIUtil {
 	public static String processHR(String PID, String statfrmdt,String stattodt,String tranfrmdt,String trantodt )  {
 		StringBuffer requeststring=new StringBuffer(219);
 		requeststring.append("<EDEX><EDEX><propertyid>").append(PID.trim()).append("</propertyid><statuschangedatefrom>")
-		.append(statfrmdt.trim()).append("</statuschangedatefrom><statuschangedateto>").append(stattodt.trim())
-		.append("</statuschangedateto><transactiondatefrom>").append(tranfrmdt.trim()).append("</transactiondatefrom><transactiondateto>").append(trantodt.trim()).append("</transactiondateto></EDEX></EDEX>");
+		.append(statfrmdt).append("</statuschangedatefrom><statuschangedateto>").append(stattodt)
+		.append("</statuschangedateto><transactiondatefrom>").append(tranfrmdt).append("</transactiondatefrom><transactiondateto>").append(trantodt).append("</transactiondateto></EDEX></EDEX>");
 
 		return requeststring.toString();
 
