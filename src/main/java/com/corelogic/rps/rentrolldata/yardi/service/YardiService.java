@@ -21,7 +21,7 @@ public class YardiService {
 
 	public Document getYardiProperties(String username, String password, String serverName, String databaseName,
 			String platform, String interfaceEntity, String interfaceLicence, String yardiEndPoint) throws Exception {
-		org.w3c.dom.Document document = null;
+		Document document = null;
 		try {
 			ItfRentersInsurance30Soap yardiService = YardiUtils.getProxy();
 			BindingProvider bindingProvider = (BindingProvider) yardiService;
@@ -33,7 +33,9 @@ public class YardiService {
 			ElementNSImpl element = (ElementNSImpl) propertyResult;
 			document = element.getOwnerDocument();
 		} catch (Exception e) {
-			log.info("error while retrieving yardi proeprties" + e.getMessage());
+			if (log.isInfoEnabled()) {
+				log.info("error while retrieving yardi proeprties" + e.getMessage());
+			}
 			throw e;
 
 		}
@@ -56,7 +58,9 @@ public class YardiService {
 			document = element.getOwnerDocument();
 
 		} catch (Exception e) {
-			log.info("error while retrieving yardi proeprties" + e.getMessage());
+			if (log.isInfoEnabled()) {
+				log.info("error while retrieving yardi proeprties" + e.getMessage());
+			}
 			throw e;
 
 		}
