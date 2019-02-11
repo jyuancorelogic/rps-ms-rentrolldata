@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Yardi Renter's Insurance v3.0 Web Service. Utilizes XML in Renter's Insurance Yardi Standard Utilizing MITS Core Data 3.0. All web methods contained in this web service that read/write data from Voyager will require login credentials.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30">
+      <s:element name="GetPropertyConfigurations">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Platform" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceEntity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceLicense" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPropertyConfigurationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPropertyConfigurationsResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUnitConfiguration">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Platform" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PropertyId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceEntity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceLicense" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUnitConfigurationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUnitConfigurationResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CustomerSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Platform" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PropertyId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceEntity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceLicense" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="XMLDoc">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CustomerSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerSearchResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInsurancePolicies">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Platform" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="YardiPropertyId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceEntity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceLicense" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TenantId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PolicyDateLastModified" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInsurancePoliciesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInsurancePoliciesResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportInsurancePolicies">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Platform" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="YardiPropertyId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceEntity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceLicense" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Policy">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportInsurancePoliciesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ImportInsurancePoliciesResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInsuranceTLLPolicies">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Platform" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="YardiPropertyId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceEntity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceLicense" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInsuranceTLLPoliciesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInsuranceTLLPoliciesResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInsuranceMasterPolicies">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Platform" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="YardiPropertyId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceEntity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceLicense" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInsuranceMasterPoliciesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInsuranceMasterPoliciesResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportDocumentToVoyager">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Platform" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="YardiPropertyId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceEntity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceLicense" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ObjId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ObjType" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="fileExt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AttachmentType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Bytes" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="suffix" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bWebLink" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportDocumentToVoyagerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ImportDocumentToVoyagerResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportInsurancePolicyClaims">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Platform" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="YardiPropertyId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceEntity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceLicense" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Claim">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportInsurancePolicyClaimsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ImportInsurancePolicyClaimsResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExportAttachment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ServerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Platform" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="YardiPropertyId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceEntity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InterfaceLicense" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ObjId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExportAttachmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExportAttachmentResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVersionNumber_Str">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetVersionNumber_StrResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVersionNumber_StrResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVersionNumber">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetVersionNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVersionNumberResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Ping">
+        <s:complexType />
+      </s:element>
+      <s:element name="PingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetPropertyConfigurationsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPropertyConfigurations" />
+  </wsdl:message>
+  <wsdl:message name="GetPropertyConfigurationsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPropertyConfigurationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUnitConfigurationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUnitConfiguration" />
+  </wsdl:message>
+  <wsdl:message name="GetUnitConfigurationSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUnitConfigurationResponse" />
+  </wsdl:message>
+  <wsdl:message name="CustomerSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:CustomerSearch" />
+  </wsdl:message>
+  <wsdl:message name="CustomerSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:CustomerSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInsurancePoliciesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInsurancePolicies" />
+  </wsdl:message>
+  <wsdl:message name="GetInsurancePoliciesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInsurancePoliciesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ImportInsurancePoliciesSoapIn">
+    <wsdl:part name="parameters" element="tns:ImportInsurancePolicies" />
+  </wsdl:message>
+  <wsdl:message name="ImportInsurancePoliciesSoapOut">
+    <wsdl:part name="parameters" element="tns:ImportInsurancePoliciesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInsuranceTLLPoliciesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInsuranceTLLPolicies" />
+  </wsdl:message>
+  <wsdl:message name="GetInsuranceTLLPoliciesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInsuranceTLLPoliciesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInsuranceMasterPoliciesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInsuranceMasterPolicies" />
+  </wsdl:message>
+  <wsdl:message name="GetInsuranceMasterPoliciesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInsuranceMasterPoliciesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ImportDocumentToVoyagerSoapIn">
+    <wsdl:part name="parameters" element="tns:ImportDocumentToVoyager" />
+  </wsdl:message>
+  <wsdl:message name="ImportDocumentToVoyagerSoapOut">
+    <wsdl:part name="parameters" element="tns:ImportDocumentToVoyagerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ImportInsurancePolicyClaimsSoapIn">
+    <wsdl:part name="parameters" element="tns:ImportInsurancePolicyClaims" />
+  </wsdl:message>
+  <wsdl:message name="ImportInsurancePolicyClaimsSoapOut">
+    <wsdl:part name="parameters" element="tns:ImportInsurancePolicyClaimsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExportAttachmentSoapIn">
+    <wsdl:part name="parameters" element="tns:ExportAttachment" />
+  </wsdl:message>
+  <wsdl:message name="ExportAttachmentSoapOut">
+    <wsdl:part name="parameters" element="tns:ExportAttachmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionNumber_StrSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVersionNumber_Str" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionNumber_StrSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVersionNumber_StrResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVersionNumber" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVersionNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="PingSoapIn">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="PingSoapOut">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ItfRentersInsurance3_0Soap">
+    <wsdl:operation name="GetPropertyConfigurations">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Allows the export of a list of properties from the Yardi Voyager database that are associated with an agency for Renters Insurance. Can be used thru 1/1/13 without an InterfaceLicense</wsdl:documentation>
+      <wsdl:input message="tns:GetPropertyConfigurationsSoapIn" />
+      <wsdl:output message="tns:GetPropertyConfigurationsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnitConfiguration">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Allows the export of a list of unit information from the Yardi Voyager database that are associated with a property. Can be used thru 1/1/13 without an InterfaceLicense</wsdl:documentation>
+      <wsdl:input message="tns:GetUnitConfigurationSoapIn" />
+      <wsdl:output message="tns:GetUnitConfigurationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CustomerSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search to return a unique tenant code as it appears in Yardi Voyager based on the unit code and tenant information. Can be used thru 1/1/13 without an InterfaceLicense</wsdl:documentation>
+      <wsdl:input message="tns:CustomerSearchSoapIn" />
+      <wsdl:output message="tns:CustomerSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInsurancePolicies">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Allows export of resident policy data for a given property/property list. Can be used thru 1/1/13 without an InterfaceLicense</wsdl:documentation>
+      <wsdl:input message="tns:GetInsurancePoliciesSoapIn" />
+      <wsdl:output message="tns:GetInsurancePoliciesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportInsurancePolicies">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Allows import of resident transaction data from a 3rd party system. Can be used thru 1/1/13 without an InterfaceLicense</wsdl:documentation>
+      <wsdl:input message="tns:ImportInsurancePoliciesSoapIn" />
+      <wsdl:output message="tns:ImportInsurancePoliciesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInsuranceTLLPolicies">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Allows export of resident TLL policy data for a given property/property list. Can be used thru 1/1/13 without an InterfaceLicense</wsdl:documentation>
+      <wsdl:input message="tns:GetInsuranceTLLPoliciesSoapIn" />
+      <wsdl:output message="tns:GetInsuranceTLLPoliciesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInsuranceMasterPolicies">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Allows export of resident Master policy data for a given property/property list.</wsdl:documentation>
+      <wsdl:input message="tns:GetInsuranceMasterPoliciesSoapIn" />
+      <wsdl:output message="tns:GetInsuranceMasterPoliciesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportDocumentToVoyager">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Import document to Vouager</wsdl:documentation>
+      <wsdl:input message="tns:ImportDocumentToVoyagerSoapIn" />
+      <wsdl:output message="tns:ImportDocumentToVoyagerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportInsurancePolicyClaims">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Allows import of resident Claims data based on policies</wsdl:documentation>
+      <wsdl:input message="tns:ImportInsurancePolicyClaimsSoapIn" />
+      <wsdl:output message="tns:ImportInsurancePolicyClaimsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExportAttachment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Export documents from voyager</wsdl:documentation>
+      <wsdl:input message="tns:ExportAttachmentSoapIn" />
+      <wsdl:output message="tns:ExportAttachmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVersionNumber_Str">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">(Deprecated)</wsdl:documentation>
+      <wsdl:input message="tns:GetVersionNumber_StrSoapIn" />
+      <wsdl:output message="tns:GetVersionNumber_StrSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVersionNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns current version number of Interfaces concatenated with Renters Insurance Plugin version (XX_Y)</wsdl:documentation>
+      <wsdl:input message="tns:GetVersionNumberSoapIn" />
+      <wsdl:output message="tns:GetVersionNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <wsdl:input message="tns:PingSoapIn" />
+      <wsdl:output message="tns:PingSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ItfRentersInsurance3_0Soap" type="tns:ItfRentersInsurance3_0Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPropertyConfigurations">
+      <soap:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/GetPropertyConfigurations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnitConfiguration">
+      <soap:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/GetUnitConfiguration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerSearch">
+      <soap:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/CustomerSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInsurancePolicies">
+      <soap:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/GetInsurancePolicies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportInsurancePolicies">
+      <soap:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/ImportInsurancePolicies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInsuranceTLLPolicies">
+      <soap:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/GetInsuranceTLLPolicies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInsuranceMasterPolicies">
+      <soap:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/GetInsuranceMasterPolicies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportDocumentToVoyager">
+      <soap:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/ImportDocumentToVoyager" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportInsurancePolicyClaims">
+      <soap:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/ImportInsurancePolicyClaims" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportAttachment">
+      <soap:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/ExportAttachment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersionNumber_Str">
+      <soap:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/GetVersionNumber_Str" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersionNumber">
+      <soap:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/GetVersionNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ItfRentersInsurance3_0Soap12" type="tns:ItfRentersInsurance3_0Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPropertyConfigurations">
+      <soap12:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/GetPropertyConfigurations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnitConfiguration">
+      <soap12:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/GetUnitConfiguration" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerSearch">
+      <soap12:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/CustomerSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInsurancePolicies">
+      <soap12:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/GetInsurancePolicies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportInsurancePolicies">
+      <soap12:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/ImportInsurancePolicies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInsuranceTLLPolicies">
+      <soap12:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/GetInsuranceTLLPolicies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInsuranceMasterPolicies">
+      <soap12:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/GetInsuranceMasterPolicies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportDocumentToVoyager">
+      <soap12:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/ImportDocumentToVoyager" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportInsurancePolicyClaims">
+      <soap12:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/ImportInsurancePolicyClaims" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportAttachment">
+      <soap12:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/ExportAttachment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersionNumber_Str">
+      <soap12:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/GetVersionNumber_Str" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersionNumber">
+      <soap12:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/GetVersionNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://tempuri.org/YSI.Interfaces.WebServices/ItfRentersInsurance30/Ping" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ItfRentersInsurance3_0">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Yardi Renter's Insurance v3.0 Web Service. Utilizes XML in Renter's Insurance Yardi Standard Utilizing MITS Core Data 3.0. All web methods contained in this web service that read/write data from Voyager will require login credentials.</wsdl:documentation>
+    <wsdl:port name="ItfRentersInsurance3_0Soap" binding="tns:ItfRentersInsurance3_0Soap">
+      <soap:address location="http://www.yardiasp14.com/42258polinger/Webservices/ItfRentersinsurance.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ItfRentersInsurance3_0Soap12" binding="tns:ItfRentersInsurance3_0Soap12">
+      <soap12:address location="http://www.yardiasp14.com/42258polinger/Webservices/ItfRentersinsurance.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
