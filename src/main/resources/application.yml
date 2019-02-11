@@ -2,33 +2,42 @@
 # = DATA SOURCE
 # ===============================
 
-
 spring:
-  datasource:
-           hikari:   # Set here configurations for the database connection
-                    connection-test-query:
-           url: 
-           username: 
-           password: 
-           driver-class-name: 
-  jpa:
-        database-platform: 
-        database: 
-        show-sql: 
-        properties:
-            hibernate.cache.use_second_level_cache: false
-            hibernate.cache.use_query_cache: false
-            hibernate.generate_statistics: false
+  main:
+    web-environment: true
 
-# ======================================
-# = Enable SQL Parameter Tracing in Logs
-# ======================================
-#logging:
-#  level:
-#    org:
-#      hibernate:
-#        type: trace
-#        SQL: debug
+mssql:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    jdbcUrl: jdbc:sqlserver://10.214.32.200:1433;databaseName=microservices
+    username: weblogin
+    password: web10@gin
+    remove-abandoned: true
+    remove-abandoned-timeout: 120
+    log-abandoned: true
+    max-active: 50
+    default-auto-commit: true
+    test-on-borrow: true
+    test-on-connect: true
+    test-while-idle: true
+    time-between-eviction-runs-millis: 60000
+    validation-query: SELECT 1
+    tomcat:
+      remove-abandoned: true
+      remove-abandoned-timeout: 120
+      log-abandoned: true
+      default-auto-commit: true
+      test-on-connect: true
+      test-on-borrow: true
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      validation-query: SELECT 1
+  jpa:
+    database-platform: org.hibernate.dialect.SQLServer2008Dialect
+    database: SQL_SERVER
+    show-sql: true
+
+
 amsi:
   url: http://www.clk-pm.net/AMSIweb/edexweb/esite/leasing.asmx
   username: fasrclk
@@ -36,6 +45,7 @@ amsi:
   portfolio: esite clk
   
 yardi:
+  cronExpression: 0 48 15 * * ?
   endpoint: https://www.yardiasp14.com/42258polinger/Webservices/ItfRentersinsurance.asmx
   username: CLSRRent
   password: CoreLogic123
