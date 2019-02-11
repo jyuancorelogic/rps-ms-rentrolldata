@@ -46,25 +46,32 @@ repositories {
     }
 }
 
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
 ext {
     wiremock = '2.11.0'
     checkstyleSevntu = '1.24.2'
     swagger = '2.8.0'
     db2jccDriverVersion = '10.1'
     db2DriverVersion = '9.4'
+    msSqlDriverVersion = '4.0'
 }
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-actuator")  
-      compile("org.springframework.boot:spring-boot-starter-tomcat")   
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-jdbc")
+    compile("org.springframework.boot:spring-boot-starter-tomcat")   
     compile("io.springfox:springfox-swagger2:${swagger}")
     compile("io.springfox:springfox-swagger-ui:${swagger}")
     compile("com.gemstone.gemfire:gemfire:8.2.4")
     compile ("com.ancientprogramming.fixedformat4j:fixedformat4j:1.2.2")  
     compile ("cglib:cglib-nodep:3.1")
     compile ("org.springframework:spring-aspects:5.1.4.RELEASE")  
-    compile ("org.springframework:spring-aspects:5.1.4.RELEASE")  
+    compile ("org.springframework:spring-aspects:5.1.4.RELEASE") 
+     compile("com.microsoft.sqlserver:sqljdbc4:${msSqlDriverVersion}") 
     annotationProcessor("org.projectlombok:lombok:1.16.20")
     compileOnly("org.projectlombok:lombok:1.16.20")
     testCompile("org.springframework.boot:spring-boot-starter-test")
