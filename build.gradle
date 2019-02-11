@@ -45,8 +45,8 @@ repositories {
     }
 }
 
-compileJava.options.encoding = "UTF-8"
-compileTestJava.options.encoding = "UTF-8"
+//compileJava.options.encoding = "UTF-8"
+//compileTestJava.options.encoding = "UTF-8"
 
 ext {
     wiremock = '2.11.0'

@@ -1,4 +1,4 @@
-package com.corelogic.rps.rentrolldata.amsi;
+package com.corelogic.rps.rentrolldata.amsi.util;
 
 import java.net.URL;
 
