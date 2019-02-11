@@ -13,7 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.corelogic.rps.rentrolldata.amsi.AMSIGetPropertyList;
+import com.corelogic.rps.rentrolldata.amsi.service.AmsiService;
 
 
 
@@ -25,13 +25,13 @@ import com.corelogic.rps.rentrolldata.amsi.AMSIGetPropertyList;
 @ActiveProfiles("itest")
 public class AMSIPropertysItest {
 
-    @Autowired
-    private AMSIGetPropertyList amsiproperty;
+     @Autowired
+        AmsiService amsiservice;
     
     @Test
     public void getPropertyListAMSItest() throws MalformedURLException{
      String result="";
-		result = amsiproperty.getPropertyListAMSI(null);
+		result = amsiservice.getPropertyListAMSI(null);
 	
         Assertions.assertThat(result.length()).isGreaterThan(0);
     }
