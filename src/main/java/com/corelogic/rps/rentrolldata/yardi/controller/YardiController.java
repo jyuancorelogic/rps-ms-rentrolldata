@@ -96,7 +96,7 @@ public class YardiController {
 				} catch (Exception ex) {
 					 if (log.isInfoEnabled()) {
 					log.info("Error retrieving rent Yardi roll data for the furnisher ID"
-							+ vendorRequestParams.getVendorParamsId().getFurnisher());
+							, vendorRequestParams.getVendorParamsId().getFurnisher());
 					 }
 					auditService.updateRequest(requestId, RequestStatus.FAILED);
 				}

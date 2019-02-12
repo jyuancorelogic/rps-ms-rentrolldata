@@ -34,7 +34,7 @@ public class YardiService {
 			document = element.getOwnerDocument();
 		} catch (Exception e) {
 			if (log.isInfoEnabled()) {
-				log.info("error while retrieving yardi proeprties" + e.getMessage());
+				log.info("error while retrieving yardi proeprties" , e.getMessage());
 			}
 			throw e;
 
@@ -59,7 +59,7 @@ public class YardiService {
 
 		} catch (Exception e) {
 			if (log.isInfoEnabled()) {
-				log.info("error while retrieving yardi proeprties" + e.getMessage());
+				log.info("error while retrieving yardi proeprties" , e.getMessage());
 			}
 			throw e;
 

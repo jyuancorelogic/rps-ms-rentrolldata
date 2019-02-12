@@ -15,6 +15,13 @@ import com.corelogic.rps.rentrolldata.yardi.generated.ItfRentersInsurance30Soap;
 import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class YardiUtils {
+	
+
+
+	private YardiUtils() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 
 	public static ItfRentersInsurance30Soap getProxy() {
 		ItfRentersInsurance30 service = new ItfRentersInsurance30();
@@ -32,7 +39,7 @@ public class YardiUtils {
 			 
 		} catch (TransformerException e) {
 			if (log.isInfoEnabled()) {
-                log.info("TransformerException" + e);
+                log.info("TransformerException" , e);
             }
 
 		}

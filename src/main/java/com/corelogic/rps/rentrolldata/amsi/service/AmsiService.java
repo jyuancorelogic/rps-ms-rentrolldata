@@ -31,7 +31,7 @@ public class AmsiService {
     @Value("${amsi.portfolio}")
     private String portfolio;
 
-    public static final String MalformedURLException="MalformedURLException";
+
   
 
     public boolean executeAMSIServices() {
@@ -58,11 +58,11 @@ public class AmsiService {
             LeasingSoap port = AMSIUtil.getProxy(urlAddress);
             result = port.getPropertyList(username,password, portfolio, "");
                       if (log.isInfoEnabled()) {
-                log.info("getPropertyListAMSI" + result);
+                log.info("getPropertyListAMSI", result);
             }
         } catch (MalformedURLException e) {
             if (log.isInfoEnabled()) {
-                log.info(MalformedURLException + e);
+                log.info("MalformedURLException in getPropertyListAMSI", e);
             }
 
         }
@@ -78,11 +78,11 @@ public class AmsiService {
             String proprequest = AMSIUtil.processHR(propertyId);
             result = port.getPropertyResidents(username,password, portfolio, proprequest);
             if (log.isInfoEnabled()) {
-                log.info("getPropertyResidents" + result);
+                log.info("getPropertyResidents", result);
             }
         } catch (MalformedURLException e) {
             if (log.isInfoEnabled()) {
-                log.info(MalformedURLException + e);
+                log.info("MalformedURLException in getPropertyResidents", e);
             }
         }
 
@@ -96,11 +96,11 @@ public class AmsiService {
             String proprequest = AMSIUtil.processHR(propertyId);
             result = port.getPropertyUnits(username, password, portfolio, proprequest);
             if (log.isInfoEnabled()) {
-                log.info("getPropertyUnits" + result);
+                log.info("getPropertyUnits" , result);
             }
         } catch (MalformedURLException e) {
             if (log.isInfoEnabled()) {
-                log.info(MalformedURLException + e);
+            	 log.info("Exception in getPropertyUnits ", e);
             }
 
         }
@@ -120,11 +120,12 @@ public class AmsiService {
     		result2 = port.getResidentsByStatusChangeOrTransactionDate(username, password,
     				portfolio, proprequesttran);
     		if (log.isInfoEnabled()) {
-    			log.info("getResidentsByStatusChangeOrTransactionDateForResidents" + result+"result2"+result2);
+    			log.info("getResidentsByStatusChangeOrTransactionDateForResidents" ,  result);
+    			log.info("result2",result2);
     		}
     	} catch (MalformedURLException e) {
     		if (log.isInfoEnabled()) {
-    			log.info(MalformedURLException + e);
+    			 log.info("MalformedURLException", e);
     		}
 
     	}
@@ -139,11 +140,11 @@ public class AmsiService {
                 result = port.getResidentsByStatusChangeOrTransactionDate(username, password,
                         portfolio, proprequest);
                 if (log.isInfoEnabled()) {
-                    log.info("getResidentsByStatusChangeOrTransactionDateForClients" + result);
+                    log.info("getResidentsByStatusChangeOrTransactionDateForClients" ,  result);
                 }
             } catch (MalformedURLException e) {
                 if (log.isInfoEnabled()) {
-                    log.info(MalformedURLException + e);
+                	 log.info("MalformedURLException", e);
                 }
 
             }
