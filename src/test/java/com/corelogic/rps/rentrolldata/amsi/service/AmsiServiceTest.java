@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
+
 import org.mockito.MockitoAnnotations;
 
 //import lombok.extern.log4j.Log4j2;
@@ -44,22 +44,22 @@ public class AmsiServiceTest {
 
     @Test
     public void testGetPropertyResidents() throws Exception {
-        amsiService.getPropertyResidents("propertyId");
+        amsiService.getPropertyResidents("120");
     }
 
     @Test
     public void testGetPropertyUnits() throws Exception {
-        amsiService.getPropertyUnits("propertyId");
+        amsiService.getPropertyUnits("121");
     }
 
     @Test
     public void testGetResidentsByStatusChangeOrTransactionDateForResidents() throws Exception {
-        amsiService.getResidentsByStatusChangeOrTransactionDateForResidents("propertyId");
+        amsiService.getResidentsByStatusChangeOrTransactionDateForResidents("626");
     }
 
     @Test
     public void testGetResidentsByStatusChangeOrTransactionDateForClients() throws Exception {
-        amsiService.getResidentsByStatusChangeOrTransactionDateForClients("propertyId");
+        amsiService.getResidentsByStatusChangeOrTransactionDateForClients("621");
     }
     
   /*  @Test

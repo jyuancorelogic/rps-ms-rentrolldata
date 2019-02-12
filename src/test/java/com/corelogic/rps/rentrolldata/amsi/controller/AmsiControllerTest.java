@@ -1,7 +1,6 @@
 package com.corelogic.rps.rentrolldata.amsi.controller;
 
 import com.corelogic.rps.rentrolldata.amsi.service.AmsiService;
-import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -16,8 +15,7 @@ import static org.mockito.Mockito.*;
 public class AmsiControllerTest {
     @Mock
     AmsiService amsiservice;
-    @Mock
-    Logger log;
+
     @InjectMocks
     AmsiController amsiController;
 

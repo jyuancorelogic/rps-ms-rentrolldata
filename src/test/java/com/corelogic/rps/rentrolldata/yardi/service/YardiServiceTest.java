@@ -1,7 +1,7 @@
 package com.corelogic.rps.rentrolldata.yardi.service;
 
 import com.corelogic.rps.rentrolldata.audit.service.AuditService;
-import org.apache.logging.log4j.Logger;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,26 +18,37 @@ import static org.mockito.Mockito.*;
 public class YardiServiceTest {
     @Mock
     AuditService auditService;
-    @Mock
-    Logger log;
+    public static final String yovhyeqo_live="yovhyeqo_live";
     @InjectMocks
     YardiService yardiService;
+    public static final String license="MIIBEAYJKwYBBAGCN1gDoIIBATCB/gYKKwYBBAGCN1gDAaCB7zCB7AIDAgABAgJoAQICAIAEAAQQ23OWB9Mvr3tLAnvLm5e9hASByGMz/H5b6mLwEnw9ZXisQk7KrPKdOVt37cGegkYjY9ArPEtkroeFlrRew3Tp+CWFtiyA2tDNx4osvpI2uWaOuKsatS5fGiuoImOhE57hiKFsh8MATTGfFOlXIE0KYbcryGQebHH1c12JyFyCww13Ya4a2nMtJrriyDik/v5yBjSBKlt/jLfPQNJvdFKTpYQJz3ijG4oYtUlhV/nXBfiB05WrNoyZHTZns+59hWWDR9iDkcFJlcvgh2RFwdJTvdt3ZLiqrZKpEQgE";
+
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
-/*    @Test
+   @Test
     public void testGetYardiProperties() throws Exception {
-        Document result = yardiService.getYardiProperties("username", "password", "serverName", "databaseName", "platform", "interfaceEntity", "interfaceLicence", "yardiEndPoint");
-        Assert.assertEquals(null, result);
+	   boolean res=false;
+        Document result = yardiService.getYardiProperties("CLSRRent", "CoreLogic123", "yovhyeqo_live", yovhyeqo_live, "SQL Server", "CoreLogic Renters Insurance", license, "https://www.yardiasp14.com/42258polinger/Webservices/ItfRentersinsurance.asmx");
+        if (result!=null){
+        	res=true;
+        }
+        	
+        
+        Assert.assertEquals(true, res);
     }
 
     @Test
     public void testGetYardiUnitConfiguration() throws Exception {
-        Document result = yardiService.getYardiUnitConfiguration("username", "password", "serverName", "databaseName", "platform", "interfaceEntity", "interfaceLicence", "yardiEndPoint", "property");
-        Assert.assertEquals(null, result);
-    }*/
+    	boolean res=false;
+        Document result = yardiService.getYardiUnitConfiguration("CLSRRent", "CoreLogic123", yovhyeqo_live, yovhyeqo_live, "SQL Server", "CoreLogic Renters Insurance",license, "https://www.yardiasp14.com/42258polinger/Webservices/ItfRentersinsurance.asmx","123");
+        if (result!=null){
+        	res=true;
+        }
+        Assert.assertEquals(true, res);
+    }
 }
 
