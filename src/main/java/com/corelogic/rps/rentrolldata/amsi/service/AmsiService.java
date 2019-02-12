@@ -42,7 +42,7 @@ public class AmsiService {
              getPropertyUnits(propertId);
              getPropertyResidents(propertId);
           getResidentsByStatusChangeOrTransactionDateForResidents(propertId);
-          return true;
+          result= true;
         }
 
         return result;

@@ -94,8 +94,10 @@ public class YardiController {
 						}
 					}
 				} catch (Exception ex) {
-					log.error("Error retrieving rent Yardi roll data for the furnisher ID"
+					 if (log.isInfoEnabled()) {
+					log.info("Error retrieving rent Yardi roll data for the furnisher ID"
 							+ vendorRequestParams.getVendorParamsId().getFurnisher());
+					 }
 					auditService.updateRequest(requestId, RequestStatus.FAILED);
 				}
 			});

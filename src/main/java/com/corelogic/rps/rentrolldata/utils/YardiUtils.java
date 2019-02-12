@@ -12,6 +12,8 @@ import org.w3c.dom.Document;
 import com.corelogic.rps.rentrolldata.yardi.generated.ItfRentersInsurance30;
 import com.corelogic.rps.rentrolldata.yardi.generated.ItfRentersInsurance30Soap;
 
+import lombok.extern.log4j.Log4j2;
+@Log4j2
 public class YardiUtils {
 
 	public static ItfRentersInsurance30Soap getProxy() {
@@ -26,10 +28,13 @@ public class YardiUtils {
 			transformer = tf.newTransformer();
 			StringWriter writer = new StringWriter();
 			transformer.transform(new DOMSource(doc), new StreamResult(writer));
-			String output = writer.getBuffer().toString();
-			return output;
+			return writer.getBuffer().toString();
+			 
 		} catch (TransformerException e) {
-			e.printStackTrace();
+			if (log.isInfoEnabled()) {
+                log.info("TransformerException" + e);
+            }
+
 		}
 
 		return null;

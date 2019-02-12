@@ -15,14 +15,14 @@ public class VendorRequestService {
 	
 	public List<VendorRequestParams> getVendorRequestData(String vendor)
 	{
-		List<VendorRequestParams> VendorRequestParamsList=vendorRequestParamsRepository.findByVendor(vendor);
-		return VendorRequestParamsList;
+		return vendorRequestParamsRepository.findByVendor(vendor);
+		
 	}
 
 	public List<VendorRequestParams> getVendorDataByFurnisher(String furnisher)
 	{
-		List<VendorRequestParams> VendorRequestParamsList=vendorRequestParamsRepository.findByFurnisher(furnisher);
-		return VendorRequestParamsList;
+		return vendorRequestParamsRepository.findByFurnisher(furnisher);
+		
 	}
 	
 }
