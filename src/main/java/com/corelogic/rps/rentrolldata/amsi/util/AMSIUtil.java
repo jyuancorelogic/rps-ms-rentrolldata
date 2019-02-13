@@ -1,15 +1,22 @@
 package com.corelogic.rps.rentrolldata.amsi.util;
 
+import java.io.StringReader;
 import java.net.URL;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 
 import com.corelogic.rps.rentrolldata.amsi.generated.Leasing;
 import com.corelogic.rps.rentrolldata.amsi.generated.LeasingSoap;
 
 public class AMSIUtil {
 
-	 private AMSIUtil() {
-		    throw new IllegalStateException("Utility class");
-		  }
+	private AMSIUtil() {
+		throw new IllegalStateException("Utility class");
+	}
 	public static LeasingSoap getProxy(URL Urllcl) {
 		Leasing leasing = new Leasing();
 		return leasing.getLeasingSoap();
@@ -35,5 +42,19 @@ public class AMSIUtil {
 		return requeststring.toString();
 
 	}
+	
+	public static Document convertStringToDocument(String xmlStr) {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();  
+        DocumentBuilder builder;  
+        try  
+        {  
+            builder = factory.newDocumentBuilder();  
+            Document doc = builder.parse( new InputSource( new StringReader( xmlStr ) ) ); 
+            return doc;
+        } catch (Exception e) {  
+        
+        } 
+        return null;
+    }
 
 }

@@ -25,12 +25,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class AMSIPropertysItest {
 
     @Autowired
-    private AmsiService amsiservice;
+    private AmsiService amsiService;
     
     @Test
     public void getPropertyListAMSItest() {
      String result="";
-		result = amsiservice.getPropertyListAMSI();
+		result = amsiService.getPropertyListAMSI("http://www.clk-pm.net/AMSIweb/edexweb/esite/leasing.asmx", "fasrclk", "fasrclk", "esite clk");
 	
         Assertions.assertThat(result.length()).isGreaterThan(0);
     }
