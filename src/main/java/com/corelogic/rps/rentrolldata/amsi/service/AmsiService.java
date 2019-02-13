@@ -19,38 +19,10 @@ import java.net.URL;
 public class AmsiService {
 
 
-    @Value("${amsi.endpoint}")
-    private String url;
-
-    @Value("${amsi.username}")
-    private String username;
-
-    @Value("${amsi.password}")
-    private String password;
-
-    @Value("${amsi.portfolio}")
-    private String portfolio;
 
 
-  
 
-    public boolean executeAMSIServices() {
-        boolean result = false;
-        String propertylist = getPropertyListAMSI();
-        if (propertylist != null) {
-            String propertId="626";
-             getPropertyUnits(propertId);
-             getPropertyResidents(propertId);
-          getResidentsByStatusChangeOrTransactionDateForResidents(propertId);
-          result= true;
-        }
-
-        return result;
-
-    }
-
-
-    public String getPropertyListAMSI() {
+    public String getPropertyListAMSI(String url, String username, String password,String portfolio ) {
         String result = "";
         try {
             log.info(url);
@@ -70,7 +42,7 @@ public class AmsiService {
     }
 
 
-    public void getPropertyResidents(String propertyId) {
+    public String getPropertyResidents(String url, String username, String password,String portfolio, String propertyId) {
         String result = "";
         try {
             URL urladdress = new URL(url);
@@ -85,10 +57,11 @@ public class AmsiService {
                 log.info("MalformedURLException in getPropertyResidents", e);
             }
         }
+        return result;
 
     }
 
-    public void getPropertyUnits(String propertyId) {
+    public String getPropertyUnits(String url, String username, String password,String portfolio , String propertyId) {
         String result = "";
         try {
             URL urladdress = new URL(url);
@@ -104,8 +77,9 @@ public class AmsiService {
             }
 
         }
+        return result;
     }
-    public void getResidentsByStatusChangeOrTransactionDateForResidents(String propertyId) {
+    public String  getResidentsByStatusChangeOrTransactionDateForResidents(String url, String username, String password,String portfolio ,String propertyId) {
     	String result="";
     	String result2 = "";
     	try {
@@ -129,9 +103,10 @@ public class AmsiService {
     		}
 
     	}
+    	return result;
     }
 
-        public void getResidentsByStatusChangeOrTransactionDateForClients(String propertyId) {
+        public String  getResidentsByStatusChangeOrTransactionDateForClients(String url, String username, String password,String portfolio ,String propertyId) {
             String result = "";
             try {
                 URL urladdress = new URL(url);
@@ -148,6 +123,7 @@ public class AmsiService {
                 }
 
             }
+            return result;
         }
 
 
