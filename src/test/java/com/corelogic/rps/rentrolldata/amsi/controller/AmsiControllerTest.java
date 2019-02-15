@@ -44,10 +44,10 @@ public class AmsiControllerTest {
 
     @Test
     public void testGetAmsiRentRollData() throws Exception {
-        when(amsiservice.getPropertyListAMSI(url, fasrclk, fasrclk, esiteclk)).thenReturn("getPropertyListAMSIResponse");
-        when(amsiservice.getPropertyResidents(url, fasrclk, fasrclk, esiteclk, "184")).thenReturn("getPropertyResidentsResponse");
-        when(amsiservice.getPropertyUnits(url, fasrclk, fasrclk, esiteclk, "184")).thenReturn("getPropertyUnitsResponse");
-        when(amsiservice.getResidentsByStatusChangeOrTransactionDateForResidents(url, fasrclk, fasrclk, esiteclk, "184")).thenReturn("getResidentsByStatusChangeOrTransactionDateForResidentsResponse");
+        when(amsiservice.getPropertyListAMSI( fasrclk, fasrclk, esiteclk)).thenReturn("getPropertyListAMSIResponse");
+        when(amsiservice.getPropertyResidents( fasrclk, fasrclk, esiteclk, "184")).thenReturn("getPropertyResidentsResponse");
+        when(amsiservice.getPropertyUnits( fasrclk, fasrclk, esiteclk, "184")).thenReturn("getPropertyUnitsResponse");
+        when(amsiservice.getResidentsByStatusChangeOrTransactionDateForResidents( fasrclk, fasrclk, esiteclk, "184")).thenReturn("getResidentsByStatusChangeOrTransactionDateForResidentsResponse");
         when(auditService.saveRequest("AMSI", esiteclk, RequestStatus.IN_PROGRESS)).thenReturn(0L);
         when(auditService.saveRequestMessage(45613,"getPropertyListAMSI","RENTROLL", "AMSI", "/AMSI/esite clk", RequestStatus.SUCCESS)).thenReturn(0L);
         when(jsonUtils.getJsonString(any())).thenReturn("getJsonStringResponse");
