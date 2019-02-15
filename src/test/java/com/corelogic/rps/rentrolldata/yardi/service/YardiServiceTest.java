@@ -31,24 +31,16 @@ public class YardiServiceTest {
 
    @Test
     public void testGetYardiProperties() throws Exception {
-	   boolean res=false;
+
         Document result = yardiService.getYardiProperties("CLSRRent", "CoreLogic123", "yovhyeqo_live", yovhyeqo_live, "SQL Server", "CoreLogic Renters Insurance", license, "https://www.yardiasp14.com/42258polinger/Webservices/ItfRentersinsurance.asmx");
-        if (result!=null){
-        	res=true;
-        }
-        	
-        
-        Assert.assertEquals(true, res);
+        Assert.assertNotNull(result);    
     }
 
     @Test
     public void testGetYardiUnitConfiguration() throws Exception {
-    	boolean res=false;
+    	
         Document result = yardiService.getYardiUnitConfiguration("CLSRRent", "CoreLogic123", yovhyeqo_live, yovhyeqo_live, "SQL Server", "CoreLogic Renters Insurance",license, "https://www.yardiasp14.com/42258polinger/Webservices/ItfRentersinsurance.asmx","123");
-        if (result!=null){
-        	res=true;
-        }
-        Assert.assertEquals(true, res);
+        Assert.assertNotNull(result);    
     }
 }
 

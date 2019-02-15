@@ -52,8 +52,8 @@ import org.w3c.dom.NodeList;
 
         	log.info("Sheduled job for Yardi Rentroll started");
         	try {
-        		List<VendorRequestParams> VendorRequestParamsList = vendorRequestService.getVendorRequestData(AMSI);
-        		VendorRequestParamsList.forEach(vendorRequestParams -> {
+        		List<VendorRequestParams> vendorRequestParamsList = vendorRequestService.getVendorRequestData(AMSI);
+        		vendorRequestParamsList.forEach(vendorRequestParams -> {
         			long requestId = auditService.saveRequest(vendorRequestParams.getVendorParamsId().getVendor(),
         					vendorRequestParams.getVendorParamsId().getFurnisher(), RequestStatus.IN_PROGRESS);
         			try {

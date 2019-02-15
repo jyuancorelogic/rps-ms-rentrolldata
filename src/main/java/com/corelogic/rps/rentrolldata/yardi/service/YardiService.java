@@ -29,13 +29,11 @@ public class YardiService {
 			GetPropertyConfigurationsResponse.GetPropertyConfigurationsResult propertyConfigurationResult = yardiService
 					.getPropertyConfigurations(username, password, serverName, databaseName, platform, interfaceEntity,
 							interfaceLicence);
-			Object propertyResult = (Object) propertyConfigurationResult.getContent().get(0);
+			Object propertyResult = propertyConfigurationResult.getContent().get(0);
 			ElementNSImpl element = (ElementNSImpl) propertyResult;
 			document = element.getOwnerDocument();
 		} catch (Exception e) {
-			if (log.isInfoEnabled()) {
-				log.info("error while retrieving yardi proeprties" , e.getMessage());
-			}
+			log.error("error while retrieving yardi proeprties", e.getMessage());
 			throw e;
 
 		}
@@ -58,9 +56,7 @@ public class YardiService {
 			document = element.getOwnerDocument();
 
 		} catch (Exception e) {
-			if (log.isInfoEnabled()) {
-				log.info("error while retrieving yardi proeprties" , e.getMessage());
-			}
+			log.error("error while retrieving yardi config", e.getMessage());
 			throw e;
 
 		}
