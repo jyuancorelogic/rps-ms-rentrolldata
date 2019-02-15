@@ -30,7 +30,7 @@ public class AMSIPropertysItest {
     @Test
     public void getPropertyListAMSItest() {
      String result="";
-		result = amsiService.getPropertyListAMSI("http://www.clk-pm.net/AMSIweb/edexweb/esite/leasing.asmx", "fasrclk", "fasrclk", "esite clk");
+		result = amsiService.getPropertyListAMSI("fasrclk", "fasrclk", "esite clk");
 	
         Assertions.assertThat(result.length()).isGreaterThan(0);
     }

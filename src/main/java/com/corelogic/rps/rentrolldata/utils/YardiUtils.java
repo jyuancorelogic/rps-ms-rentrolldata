@@ -14,7 +14,7 @@ import com.corelogic.rps.rentrolldata.yardi.generated.ItfRentersInsurance30Soap;
 
 import lombok.extern.log4j.Log4j2;
 @Log4j2
-public class YardiUtils {
+public final class YardiUtils {
 	
 
 

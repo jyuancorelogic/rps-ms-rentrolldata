@@ -1,7 +1,7 @@
 package com.corelogic.rps.rentrolldata.amsi.util;
 
 import java.io.StringReader;
-import java.net.URL;
+
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -12,27 +12,30 @@ import org.xml.sax.InputSource;
 import com.corelogic.rps.rentrolldata.amsi.generated.Leasing;
 import com.corelogic.rps.rentrolldata.amsi.generated.LeasingSoap;
 
-public class AMSIUtil {
 
-	private AMSIUtil() {
+import lombok.extern.log4j.Log4j2;
+@Log4j2
+public final class AMSIUtil {
+
+	private   AMSIUtil() {
 		throw new IllegalStateException("Utility class");
 	}
-	public static LeasingSoap getProxy(URL Urllcl) {
+	public static LeasingSoap getProxy() {
 		Leasing leasing = new Leasing();
 		return leasing.getLeasingSoap();
 	}
 
-	public static String processHR(String PID) {
+	public static String processHR(String pid) {
 
 		StringBuilder requeststring = new StringBuilder(52);
-		requeststring.append("<EDEX><EDEX><propertyid>" + PID.trim() + "</propertyid></EDEX></EDEX>");
+		requeststring.append("<EDEX><EDEX><propertyid>" + pid.trim() + "</propertyid></EDEX></EDEX>");
 		return requeststring.toString();
 
 	}
 
-	public static String processHR(String PID, String statfrmdt, String stattodt, String tranfrmdt, String trantodt) {
+	public static String processHR(String pid, String statfrmdt, String stattodt, String tranfrmdt, String trantodt) {
 		StringBuilder requeststring = new StringBuilder(219);
-		requeststring.append("<EDEX><EDEX><propertyid>").append(PID.trim())
+		requeststring.append("<EDEX><EDEX><propertyid>").append(pid.trim())
 				.append("</propertyid><statuschangedatefrom>").append(statfrmdt)
 				.append("</statuschangedatefrom><statuschangedateto>").append(stattodt)
 				.append("</statuschangedateto><transactiondatefrom>").append(tranfrmdt)
@@ -44,17 +47,21 @@ public class AMSIUtil {
 	}
 	
 	public static Document convertStringToDocument(String xmlStr) {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();  
-        DocumentBuilder builder;  
-        try  
-        {  
-            builder = factory.newDocumentBuilder();  
-            Document doc = builder.parse( new InputSource( new StringReader( xmlStr ) ) ); 
-            return doc;
-        } catch (Exception e) {  
-        
-        } 
-        return null;
-    }
+		Document doc=null;
+
+		try {  
+
+			DocumentBuilderFactory db = DocumentBuilderFactory.newInstance();
+			db.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+			DocumentBuilder dbf = db.newDocumentBuilder();
+			 doc = dbf.parse( new InputSource( new StringReader( xmlStr ) ) ); 
+			
+		} catch (Exception e) {  
+			if(log.isErrorEnabled()){
+				log.error("convertStringToDocument", e);
+			}
+		} 
+		return doc;
+	}
 
 }
