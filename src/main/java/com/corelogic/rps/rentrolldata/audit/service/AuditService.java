@@ -30,7 +30,9 @@ public class AuditService {
 
 	public void updateRequest(@NotNull long requestId, RequestStatus status) {
 		RentrollRequest request = requestRepository.findById(requestId).orElse(null);
-		request.setRequestStatus(status);
+		if(request!=null){
+			request.setRequestStatus(status);
+		}
 		requestRepository.save(request);
 	}
 
@@ -44,7 +46,9 @@ public class AuditService {
 
 	public void updateRequestMessage(@NotNull long requestMessageId, RequestStatus status) {
 		RentrollRequestMessage requestMessage = messageRepository.findById(requestMessageId).orElse(null);
-		requestMessage.setRequestMessageStatus(status);
+		if(requestMessage!=null){
+			requestMessage.setRequestMessageStatus(status);
+		}
 		requestMessage.setRequestMessageCreateDateTime(LocalDateTime.now());
 		messageRepository.save(requestMessage);
 	}

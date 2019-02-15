@@ -35,28 +35,18 @@ public class VendorRequestServiceTest {
    @Test
     public void testGetVendorRequestData() throws Exception {
         when(vendorRequestParamsRepository.findByVendor(anyString())).thenReturn(Arrays.<VendorRequestParams>asList(new VendorRequestParams(new VendorParamsId("YARDI", "WRH"), "WEBSERVICE", "https://www.yardiasp13.com/35521wrh/webservices/itfrentersinsurance.asmx", "firstamer", "Addprog-35", "egapoxw_live", "MSQL26_2K8R2", "SafeRent Renters Insurance", "SQL Server", license, "Y", "N", "lastUpdateUser", LocalDateTime.of(2019, Month.FEBRUARY, 11, 22, 5, 32))));
-        boolean res=false;
-        List<VendorRequestParams> result = vendorRequestService.getVendorRequestData("YARDI");
-        if (result!=null){
-        	res=true;
-        	
-        }
-        
-       // Assert.assertEquals(Arrays.<VendorRequestParams>asList(new VendorRequestParams(new VendorParamsId("Yardi", "WRH"), "WEBSERVICE", "https://www.yardiasp13.com/35521wrh/webservices/itfrentersinsurance.asmx", "firstamer", "Addprog-35", "egapoxw_live", "MSQL26_2K8R2", "SafeRent Renters Insurance", "SQL Server", license, "Y", "N", "lashok", LocalDateTime.of(2019, Month.FEBRUARY, 11, 22, 5, 32))), result);
-        Assert.assertEquals(true,res);
+       List<VendorRequestParams> result = vendorRequestService.getVendorRequestData("YARDI");
+       Assert.assertNotNull(result);  
+
    }
 
     @Test
     public void testGetVendorDataByFurnisher() throws Exception {
         when(vendorRequestParamsRepository.findByFurnisher(anyString())).thenReturn(Arrays.<VendorRequestParams>asList(new VendorRequestParams(new VendorParamsId("vendor", "WRH"), "vendorServiceType", "https://www.yardiasp13.com/35521wrh/webservices/itfrentersinsurance.asmx", "firstamer", "Addprog-35", "egapoxw_live", "MSQL26_2K8R2", "SafeRent Renters Insurance", "SQL Server", license, "Y", "N", "lastUpdateUser", LocalDateTime.of(2019, Month.FEBRUARY, 11, 22, 5, 32))));
-        boolean res=false;
+      
         List<VendorRequestParams> result = vendorRequestService.getVendorDataByFurnisher("WRH");
-        if (result!=null){
-        	res=true;
-        	
-        }
-      //  Assert.assertEquals(Arrays.<VendorRequestParams>asList(new VendorRequestParams(new VendorParamsId("Yardi", "WRH"), "WEBSERVICE", "https://www.yardiasp13.com/35521wrh/webservices/itfrentersinsurance.asmx", "firstamer", "Addprog-35", "egapoxw_live", "MSQL26_2K8R2", "SafeRent Renters Insurance", "SQL Server", license, "Y", "N", "lashok", LocalDateTime.of(2019, Month.FEBRUARY, 11, 22, 5, 32))), result);
-        Assert.assertEquals(true,res);
+        Assert.assertNotNull(result);  
+   
     }
 }
 

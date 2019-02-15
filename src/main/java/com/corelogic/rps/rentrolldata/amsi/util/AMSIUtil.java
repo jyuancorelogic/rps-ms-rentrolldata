@@ -28,7 +28,8 @@ public final class AMSIUtil {
 	public static String processHR(String pid) {
 
 		StringBuilder requeststring = new StringBuilder(52);
-		requeststring.append("<EDEX><EDEX><propertyid>" + pid.trim() + "</propertyid></EDEX></EDEX>");
+		requeststring.append("<EDEX><EDEX><propertyid>").append( pid.trim())
+		.append("</propertyid></EDEX></EDEX>");
 		return requeststring.toString();
 
 	}

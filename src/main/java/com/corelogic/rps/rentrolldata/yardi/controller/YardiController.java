@@ -44,8 +44,8 @@ public class YardiController {
 	public void getYardiRentRollData() {
 		log.info("Sheduled job for Yardi Rentroll started");
 		try {
-			List<VendorRequestParams> VendorRequestParamsList = vendorRequestService.getVendorRequestData(YARDI);
-			VendorRequestParamsList.forEach(vendorRequestParams -> {
+			List<VendorRequestParams> vendorRequestParamsList = vendorRequestService.getVendorRequestData(YARDI);
+			vendorRequestParamsList.forEach(vendorRequestParams -> {
 				long requestId = auditService.saveRequest(vendorRequestParams.getVendorParamsId().getVendor(),
 						vendorRequestParams.getVendorParamsId().getFurnisher(), RequestStatus.IN_PROGRESS);
 				try {

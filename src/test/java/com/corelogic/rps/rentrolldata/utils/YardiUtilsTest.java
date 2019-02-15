@@ -11,26 +11,16 @@ public class YardiUtilsTest {
 
     @Test
     public void testGetProxy() throws Exception {
-    	boolean val=false;
         ItfRentersInsurance30Soap result = YardiUtils.getProxy();
-        if(result!=null){
-        	val=true;        	
-        }
-        Assert.assertEquals(true, val);
+        Assert.assertNotNull(result);    
        
-       // Assert.assertEquals(null, result);
     }
 
     @Test
     public void testConvertDocumentToString() throws Exception {
-    	boolean val=false;
-        String result = YardiUtils.convertDocumentToString(null);
-        if(result!=null){
-        	val=true;        	
-        }
-        Assert.assertEquals(true, val);
-       
-        //Assert.assertEquals("replaceMeWithExpectedResult", result);
+    	String result = YardiUtils.convertDocumentToString(null);
+    	Assert.assertNotNull(result);  
+
     }
 }
 
