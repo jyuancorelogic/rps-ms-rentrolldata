@@ -50,19 +50,27 @@ public class AmsiService {
     }
     public String  getResidentsByStatusChangeOrTransactionDateForResidents( String username, String password,String portfolio ,String propertyId) {
     	String result="";
-   // 	String result2 = "";
     
     		LeasingSoap port = AMSIUtil.getProxy();
     		String proprequestStart = AMSIUtil.processHR(propertyId,"04/20/2010",
     				"04/21/2010","", "");
-    		String proprequesttran = AMSIUtil.processHR(propertyId,"",
-    				"","04/22/2010", "04/23/2010");
     		result = port.getResidentsByStatusChangeOrTransactionDate(username, password,
     				portfolio, proprequestStart);
-    //		result2 = port.getResidentsByStatusChangeOrTransactionDate(username, password,
-    	//			portfolio, proprequesttran);
+
     	return result;
     }
+    
+    
+    public String  getResidentsByStatusTransactionDateForResidents( String username, String password,String portfolio ,String propertyId) {
+    	String result="";    
+    	LeasingSoap port = AMSIUtil.getProxy();
+    	String proprequesttran = AMSIUtil.processHR(propertyId,"",
+    			"","04/22/2010", "04/23/2010");
+    	result = port.getResidentsByStatusChangeOrTransactionDate(username, password,
+    			portfolio, proprequesttran);
+    	return result;
+    }
+
 
         public String  getResidentsByStatusChangeOrTransactionDateForClients(String username, String password,String portfolio ,String propertyId) {
             String result = "";      
@@ -73,6 +81,8 @@ public class AmsiService {
                         portfolio, proprequest);
             return result;
         }
+        
+        
 
 
 

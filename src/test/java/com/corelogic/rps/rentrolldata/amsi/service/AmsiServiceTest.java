@@ -54,4 +54,10 @@ public class AmsiServiceTest {
         String result = amsiService.getResidentsByStatusChangeOrTransactionDateForClients( fasrclk, fasrclk, esiteclk, "220");
         Assertions.assertThat(result.length()).isGreaterThan(0);
     }
+    
+    @Test
+    public void getResidentsByStatusTransactionDateForResidents() throws Exception {
+        String result = amsiService.getResidentsByStatusTransactionDateForResidents( fasrclk, fasrclk, esiteclk, "120");
+        Assertions.assertThat(result.length()).isGreaterThan(0);
+    }
 }
