@@ -14,12 +14,8 @@ public class AMSIUtilTest {
 
     @Test
     public void testGetProxy() throws Exception {
-        boolean works=false;
         LeasingSoap result = AMSIUtil.getProxy();
-        if (result!=null){
-            works=true;
-        }
-        Assert.assertTrue("true", works);
+        Assert.assertNotNull(result);
     }
 
     @Test
@@ -45,11 +41,8 @@ public class AMSIUtilTest {
 
     @Test
     public void testConvertStringToDocument() throws Exception {
-    	boolean val=false;
-        Document result = AMSIUtil.convertStringToDocument("<Properties><Property PropertyId=\"002\"honeNo=\"\"  Be2x1S /></Properties>");
-        if(result!=null){
-        	val=true;        	
-        }
-        Assert.assertFalse(val);
+
+    	Document result = AMSIUtil.convertStringToDocument("<Properties><Property PropertyId=\"002\"honeNo=\"\"  Be2x1S /></Properties>");
+    	Assert.assertNull(result);
     }
 }

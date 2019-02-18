@@ -33,7 +33,7 @@ public class YardiService {
 			ElementNSImpl element = (ElementNSImpl) propertyResult;
 			document = element.getOwnerDocument();
 		} catch (Exception e) {
-			log.error("error while retrieving yardi proeprties", e.getMessage());
+			log.error("error while retrieving yardi proeprties", e);
 			throw e;
 
 		}
@@ -56,7 +56,7 @@ public class YardiService {
 			document = element.getOwnerDocument();
 
 		} catch (Exception e) {
-			log.error("error while retrieving yardi config", e.getMessage());
+			log.error("error while retrieving yardi config", e);
 			throw e;
 
 		}

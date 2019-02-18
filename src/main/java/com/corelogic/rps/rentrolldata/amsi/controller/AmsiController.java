@@ -33,7 +33,8 @@ import org.w3c.dom.NodeList;
        	private static final String GET_PROPERTY_LIST="getPropertyListAMSI";
        	private static final String GET_PROPERTY_UNITS="getPropertyUnits";	
       	private static final String GET_PROPERTY_RESIDENTS="getPropertyResidents";
-       	private static final String GET_PROPERTY_RESIDENTS_BY_STATUS_CHANGE_TRAN_DATE="getResidentsByStatusChangeOrTransactionDateForResidents";	
+       	private static final String GET_PROPERTY_RESIDENTS_BY_STATUS_CHANGE_TRAN_DATE="getResidentsByStatusChangeOrTransactionDateForResidents";
+       	private static final String GET_PROPERTY_RESIDENTS_BY_TRAN_DATE="getResidentsByStatusTransactionDateForResidents";
        	private static final String PROPERTY="Property:";
 
         @Autowired
@@ -65,7 +66,7 @@ import org.w3c.dom.NodeList;
         				String xmlsts="";
         				try {
         					xmlString = amsiservice.getPropertyListAMSI(vendorRequestParams.getLoginId(),
-        							vendorRequestParams.getPasword(), 	vendorRequestParams.getEntity()
+        							vendorRequestParams.getPasword(), 	vendorRequestParams.getVendorDatabase()
         							);
         					auditService.saveRequestMessage(requestId, GET_PROPERTY_LIST, AMSI, RENTROLL,
         							xmlString, RequestStatus.SUCCESS);
@@ -93,7 +94,7 @@ import org.w3c.dom.NodeList;
         									RequestStatus.SUCCESS);    								
         							try {
         								xmlsts = amsiservice.getPropertyUnits( vendorRequestParams.getLoginId(),
-        										vendorRequestParams.getPasword(), vendorRequestParams.getEntity(), prop);
+        										vendorRequestParams.getPasword(), vendorRequestParams.getVendorDatabase(), prop);
 
         								auditService.saveRequestMessage(requestId, GET_PROPERTY_UNITS, AMSI,
         										RENTROLL, xmlsts, RequestStatus.SUCCESS);
@@ -111,7 +112,7 @@ import org.w3c.dom.NodeList;
         									RequestStatus.SUCCESS);    								
         							try {
         								xmlsts = amsiservice.getPropertyResidents( vendorRequestParams.getLoginId(),
-        										vendorRequestParams.getPasword(), vendorRequestParams.getEntity(), prop);
+        										vendorRequestParams.getPasword(), vendorRequestParams.getVendorDatabase(), prop);
 
         								auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS, AMSI,
         										RENTROLL, xmlsts, RequestStatus.SUCCESS);
@@ -124,17 +125,29 @@ import org.w3c.dom.NodeList;
         							}
 
         							//getResidentsByStatusChangeOrTransactionDateForResidents
+        							//getResidentsByStatusTransactionDateForResidents
         							auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_STATUS_CHANGE_TRAN_DATE, RENTROLL, AMSI,
         									jsonUtils.getJsonString(vendorRequestParams) + PROPERTY + prop,
-        									RequestStatus.SUCCESS);    								
+        									RequestStatus.SUCCESS);  
+        							auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_TRAN_DATE, RENTROLL, AMSI,
+        									jsonUtils.getJsonString(vendorRequestParams) + PROPERTY + prop,
+        									RequestStatus.SUCCESS);
         							try {
         								xmlsts = amsiservice.getResidentsByStatusChangeOrTransactionDateForResidents( vendorRequestParams.getLoginId(),
-        										vendorRequestParams.getPasword(), vendorRequestParams.getEntity(), prop);
+        										vendorRequestParams.getPasword(), vendorRequestParams.getVendorDatabase(), prop);
 
         								auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_STATUS_CHANGE_TRAN_DATE, AMSI,
         										RENTROLL, xmlsts, RequestStatus.SUCCESS);
+        								xmlsts = amsiservice.getResidentsByStatusTransactionDateForResidents( vendorRequestParams.getLoginId(),
+        										vendorRequestParams.getPasword(), vendorRequestParams.getVendorDatabase(), prop);
+
+        								auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_TRAN_DATE, AMSI,
+        										RENTROLL, xmlsts, RequestStatus.SUCCESS);
         							} catch (Exception e) {
         								auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_STATUS_CHANGE_TRAN_DATE, AMSI,
+        										RENTROLL, e.getMessage(), RequestStatus.FAILED);
+        								auditService.updateRequest(requestId, RequestStatus.FAILED);
+        								auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_TRAN_DATE, AMSI,
         										RENTROLL, e.getMessage(), RequestStatus.FAILED);
         								auditService.updateRequest(requestId, RequestStatus.FAILED);
         								

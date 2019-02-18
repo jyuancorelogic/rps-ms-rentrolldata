@@ -3,15 +3,18 @@ package com.corelogic.rps.rentrolldata.audit.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.corelogic.rps.rentrolldata.audit.data.RentrollRequest;
 import com.corelogic.rps.rentrolldata.audit.data.RentrollRequestMessage;
 import com.corelogic.rps.rentrolldata.audit.data.RequestStatus;
 import com.corelogic.rps.rentrolldata.audit.repository.AuditRequestMessageRepository;
 import com.corelogic.rps.rentrolldata.audit.repository.AuditRequestRepository;
 
+import lombok.extern.log4j.Log4j2;
+
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-
+@Log4j2
 @Service
 public class AuditService {
 
@@ -29,11 +32,13 @@ public class AuditService {
 	}
 
 	public void updateRequest(@NotNull long requestId, RequestStatus status) {
-		RentrollRequest request = requestRepository.findById(requestId).orElse(null);
-		if(request!=null){
+		RentrollRequest request = requestRepository.findById(requestId).orElse(null);	
+		try{
 			request.setRequestStatus(status);
+			requestRepository.save(request);
+		}catch(Exception e){
+			log.error("Exception in update request", e);
 		}
-		requestRepository.save(request);
 	}
 
 	public long saveRequestMessage(@NotNull long requestId, String requestAPI, String from, String to, String message,
@@ -46,10 +51,12 @@ public class AuditService {
 
 	public void updateRequestMessage(@NotNull long requestMessageId, RequestStatus status) {
 		RentrollRequestMessage requestMessage = messageRepository.findById(requestMessageId).orElse(null);
-		if(requestMessage!=null){
+		try{
 			requestMessage.setRequestMessageStatus(status);
-		}
-		requestMessage.setRequestMessageCreateDateTime(LocalDateTime.now());
-		messageRepository.save(requestMessage);
+			requestMessage.setRequestMessageCreateDateTime(LocalDateTime.now());
+			messageRepository.save(requestMessage);
+		}catch(Exception e){
+		log.error("Exception in updateRequestMessage", e);
+	}
 	}
 }
