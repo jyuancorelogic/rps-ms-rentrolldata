@@ -40,7 +40,9 @@ public final class YardiUtils {
 		} catch (TransformerException e) {
 			if (log.isInfoEnabled()) {
                 log.info("TransformerException" , e);
-            }
+            }}catch (Exception e){
+            	
+            log.error("excep",e);
 
 		}
 
