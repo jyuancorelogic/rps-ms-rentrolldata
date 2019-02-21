@@ -21,7 +21,7 @@ public class YardiService {
 	AuditService auditService;
 
 	public Document getYardiProperties(String username, String password, String serverName, String databaseName,
-			String platform, String interfaceEntity, String interfaceLicence, String yardiEndPoint) throws Exception {
+			String platform, String interfaceEntity, String interfaceLicence, String yardiEndPoint)  {
 		Document document = null;
 		ItfRentersInsurance30Soap yardiService = YardiUtils.getProxy();
 		BindingProvider bindingProvider = (BindingProvider) yardiService;
@@ -39,7 +39,7 @@ public class YardiService {
 
 	public Document getYardiUnitConfiguration(String username, String password, String serverName, String databaseName,
 			String platform, String interfaceEntity, String interfaceLicence, String yardiEndPoint, String property)
-					throws Exception {
+					 {
 		Document document = null;
 
 		ItfRentersInsurance30Soap yardiService = YardiUtils.getProxy();
