@@ -51,7 +51,7 @@ import org.w3c.dom.NodeList;
         @Scheduled(cron = "${amsi.cronExpression}")
         public void getAmsiRentRollData() {
 
-        	log.info("Sheduled job for Yardi Rentroll started");
+        	log.info("Sheduled job for AMSI Rentroll started");
         	try {
         		List<VendorRequestParams> vendorRequestParamsList = vendorRequestService.getVendorRequestData(AMSI);
         		vendorRequestParamsList.forEach(vendorRequestParams -> {
@@ -74,9 +74,7 @@ import org.w3c.dom.NodeList;
         					auditService.saveRequestMessage(requestId, GET_PROPERTY_LIST, AMSI, RENTROLL,
         							e.getMessage(), RequestStatus.FAILED);
         					auditService.updateRequest(requestId, RequestStatus.FAILED);
-        					if(log.isErrorEnabled()){
-        						log.error("Exception in GET_PROPERTY_LIST ", e);
-        					}
+        					log.error("Exception in GET_PROPERTY_LIST ", e);
         				}
         				document=AMSIUtil.convertStringToDocument(xmlString);
         				Node node = document.getDocumentElement();
@@ -88,7 +86,6 @@ import org.w3c.dom.NodeList;
         						String prop = el.getElementsByTagName("PropertyId").item(0).getTextContent();
         						if (StringUtils.isNotBlank(prop)) {
 
-        							//getPropertyUnits
         							auditService.saveRequestMessage(requestId, GET_PROPERTY_UNITS, RENTROLL, AMSI,
         									jsonUtils.getJsonString(vendorRequestParams) + PROPERTY + prop,
         									RequestStatus.SUCCESS);    								
@@ -105,8 +102,6 @@ import org.w3c.dom.NodeList;
         	        						log.error("Exception in GET_PROPERTY_UNITS ", e);
 
         							}
-
-        							//getPropertyResidents
         							auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS, RENTROLL, AMSI,
         									jsonUtils.getJsonString(vendorRequestParams) + PROPERTY + prop,
         									RequestStatus.SUCCESS);    								
@@ -124,8 +119,6 @@ import org.w3c.dom.NodeList;
         	        					
         							}
 
-        							//getResidentsByStatusChangeOrTransactionDateForResidents
-        							//getResidentsByStatusTransactionDateForResidents
         							auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_STATUS_CHANGE_TRAN_DATE, RENTROLL, AMSI,
         									jsonUtils.getJsonString(vendorRequestParams) + PROPERTY + prop,
         									RequestStatus.SUCCESS);  
@@ -159,17 +152,14 @@ import org.w3c.dom.NodeList;
         					}
         				}
         			} catch (Exception ex) {
-        				if (log.isInfoEnabled()) {
-        					log.info("Error retrieving rent Yardi roll data for the furnisher ID"
-        							, vendorRequestParams.getVendorParamsId().getFurnisher(), ex,"message");
-        				}
+        					log.error("Error retrieving amsi rent roll data", ex);
         				auditService.updateRequest(requestId, RequestStatus.FAILED);
         			}
         		});
         	} catch (Exception e) {
-        		log.error("Error running the Yardi Sheduled job", e);
+        		log.error("Error running the AMSI Sheduled job", e);
         	}
-        	log.info("Sheduled job for Yardi Rentroll ended");
+
 
 
 

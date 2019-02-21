@@ -1,13 +1,16 @@
 package com.corelogic.rps.rentrolldata.amsi.util;
 
+import java.io.IOException;
 import java.io.StringReader;
 
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import com.corelogic.rps.rentrolldata.amsi.generated.Leasing;
 import com.corelogic.rps.rentrolldata.amsi.generated.LeasingSoap;
@@ -48,20 +51,21 @@ public final class AMSIUtil {
 	}
 	
 	public static Document convertStringToDocument(String xmlStr) {
-		Document doc=null;
 
-		try {  
 
 			DocumentBuilderFactory db = DocumentBuilderFactory.newInstance();
-			db.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
-			DocumentBuilder dbf = db.newDocumentBuilder();
-			 doc = dbf.parse( new InputSource( new StringReader( xmlStr ) ) ); 
-			
-		} catch (Exception e) {  
-			if(log.isErrorEnabled()){
-				log.error("convertStringToDocument", e);
-			}
-		} 
+			Document doc=null;
+			try {
+				db.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+				DocumentBuilder dbf = db.newDocumentBuilder();
+				doc = dbf.parse( new InputSource( new StringReader( xmlStr ) ) );
+			} catch (ParserConfigurationException e) {
+				log.error("ParserConfigurationException", e);
+			} catch (SAXException | IOException e) {
+				// TODO Auto-generated catch block
+				log.error("Exception", e);
+			} 
+ 
 		return doc;
 	}
 
