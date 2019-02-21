@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.nio.charset.Charset;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -38,7 +39,7 @@ public class YardiUtilsTest {
     	factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
     	factory.setNamespaceAware(true);
     	DocumentBuilder builder = factory.newDocumentBuilder();
-    	document= builder.parse(new ByteArrayInputStream(xml.getBytes()));
+    	document= builder.parse(new ByteArrayInputStream(xml.getBytes(Charset.forName("UTF-8"))));
     	String result = YardiUtils.convertDocumentToString(document);
     	Assert.assertNotNull(result);  
 
