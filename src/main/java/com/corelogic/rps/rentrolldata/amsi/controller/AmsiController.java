@@ -51,28 +51,14 @@ import org.w3c.dom.NodeList;
 
         @Scheduled(cron = "${amsi.cronExpression}")
         public void getAmsiRentRollData() throws JsonProcessingException {
-
         	log.info("Sheduled job for AMSI Rentroll started");
-        	try {
-        		List<VendorRequestParams> vendorRequestParamsList = vendorRequestService.getVendorRequestData(AMSI);
+        	List<VendorRequestParams> vendorRequestParamsList = vendorRequestService.getVendorRequestData(AMSI);
+        	try{
         		vendorRequestParamsList.forEach(vendorRequestParams -> {
         			long requestId = auditService.saveRequest(vendorRequestParams.getVendorParamsId().getVendor(),vendorRequestParams.getVendorParamsId().getFurnisher(), RequestStatus.IN_PROGRESS);
         			try {
-        				auditService.saveRequestMessage(requestId, GET_PROPERTY_LIST, RENTROLL, AMSI,jsonUtils.getJsonString(vendorRequestParams), RequestStatus.SUCCESS);
-
-        				String xmlString = null;
-        				Document document = null;
-        				String xmlsts="";
-        				try {
-        					xmlString = amsiservice.getPropertyListAMSI(vendorRequestParams.getLoginId(), vendorRequestParams.getPasword(),vendorRequestParams.getVendorDatabase());
-        					auditService.saveRequestMessage(requestId, GET_PROPERTY_LIST, AMSI, RENTROLL,xmlString, RequestStatus.SUCCESS);
-        				} catch (Exception e) {
-        					auditService.saveRequestMessage(requestId, GET_PROPERTY_LIST, AMSI, RENTROLL,e.getMessage(), RequestStatus.FAILED);
-        					auditService.updateRequest(requestId, RequestStatus.FAILED);
-        					log.error("Exception in GET_PROPERTY_LIST ", e);
-        					throw e;
-        				}
-        				document=AMSIUtil.convertStringToDocument(xmlString);
+        				String xmlString=getPropertyList(requestId,vendorRequestParams);
+        				Document	document=AMSIUtil.convertStringToDocument(xmlString);
         				Node node = document.getDocumentElement();
         				NodeList nodeList = node.getChildNodes();
         				for (int i = 0; i < nodeList.getLength(); i++) {
@@ -81,48 +67,9 @@ import org.w3c.dom.NodeList;
         						Element el = (Element) currentNode;
         						String prop = el.getElementsByTagName("PropertyId").item(0).getTextContent();
         						if (StringUtils.isNotBlank(prop)) {
-        							auditService.saveRequestMessage(requestId, GET_PROPERTY_UNITS, RENTROLL, AMSI,jsonUtils.getJsonString(vendorRequestParams) + PROPERTY + prop,RequestStatus.SUCCESS);    								
-        							try {
-        								xmlsts = amsiservice.getPropertyUnits( vendorRequestParams.getLoginId(),vendorRequestParams.getPasword(), vendorRequestParams.getVendorDatabase(), prop);
-
-        								auditService.saveRequestMessage(requestId, GET_PROPERTY_UNITS, AMSI,RENTROLL, xmlsts, RequestStatus.SUCCESS);
-        							} catch (Exception e) {
-        								auditService.saveRequestMessage(requestId, GET_PROPERTY_UNITS, AMSI,RENTROLL, e.getMessage(), RequestStatus.FAILED);
-        								auditService.updateRequest(requestId, RequestStatus.FAILED);
-        	        						log.error("Exception in GET_PROPERTY_UNITS ", e);
-        	        						throw e;
-        							}        							
-        							auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS, RENTROLL, AMSI,jsonUtils.getJsonString(vendorRequestParams) + PROPERTY + prop,
-        									RequestStatus.SUCCESS);    								
-        							try {
-        								xmlsts = amsiservice.getPropertyResidents( vendorRequestParams.getLoginId(),vendorRequestParams.getPasword(), vendorRequestParams.getVendorDatabase(), prop);
-        								auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS, AMSI,RENTROLL, xmlsts, RequestStatus.SUCCESS);
-        							} catch (Exception e) {
-        								auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS, AMSI,RENTROLL, e.getMessage(), RequestStatus.FAILED);
-        								auditService.updateRequest(requestId, RequestStatus.FAILED);          	        					
-        								log.error("Exception in GET_PROPERTY_RESIDENTS ", e);
-        								throw e;
-
-        							}
-
-        							auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_STATUS_CHANGE_TRAN_DATE, RENTROLL, AMSI,jsonUtils.getJsonString(vendorRequestParams) + PROPERTY + prop,RequestStatus.SUCCESS);  
-        							auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_TRAN_DATE, RENTROLL, AMSI,jsonUtils.getJsonString(vendorRequestParams) + PROPERTY + prop,RequestStatus.SUCCESS);
-        							try {
-        								xmlsts = amsiservice.getResidentsByStatusChangeOrTransactionDateForResidents( vendorRequestParams.getLoginId(),vendorRequestParams.getPasword(), vendorRequestParams.getVendorDatabase(), prop);
-
-        								auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_STATUS_CHANGE_TRAN_DATE, AMSI,RENTROLL, xmlsts, RequestStatus.SUCCESS);
-        								xmlsts = amsiservice.getResidentsByStatusTransactionDateForResidents( vendorRequestParams.getLoginId(),vendorRequestParams.getPasword(), vendorRequestParams.getVendorDatabase(), prop);
-
-        								auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_TRAN_DATE, AMSI,RENTROLL, xmlsts, RequestStatus.SUCCESS);
-        							} catch (Exception e) {
-        								auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_STATUS_CHANGE_TRAN_DATE, AMSI,RENTROLL, e.getMessage(), RequestStatus.FAILED);
-        								auditService.updateRequest(requestId, RequestStatus.FAILED);
-        								auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_TRAN_DATE, AMSI,RENTROLL, e.getMessage(), RequestStatus.FAILED);
-        								auditService.updateRequest(requestId, RequestStatus.FAILED);        								
-        								log.error("Exception in GET_PROPERTY_RESIDENTS_BY_STATUS_CHANGE_TRAN_DATE ", e);
-        								throw e;
-
-        							}
+        							getPropertyUnits(requestId,prop,vendorRequestParams);
+        							getPropertyResidents(requestId,prop,vendorRequestParams);
+        							getResidentsByStatusChangeOrTransactionDateForResidents(requestId,prop,vendorRequestParams);						
         						}
         					}
         				}
@@ -131,12 +78,81 @@ import org.w3c.dom.NodeList;
         				auditService.updateRequest(requestId, RequestStatus.FAILED);
         			}
         		});
+        	}catch (Exception e) {
+    			log.error("Error running the AMSI Sheduled job", e);
+    		}
+
+        }
+        
+        private String  getPropertyList(long requestId,VendorRequestParams vendorRequestParams) throws JsonProcessingException{
+        	auditService.saveRequestMessage(requestId, GET_PROPERTY_LIST, RENTROLL, AMSI,jsonUtils.getJsonString(vendorRequestParams), RequestStatus.SUCCESS);
+			String xmlString = "";
+			
+			try {
+				xmlString = amsiservice.getPropertyListAMSI(vendorRequestParams.getLoginId(), vendorRequestParams.getPasword(),vendorRequestParams.getVendorDatabase());
+				auditService.saveRequestMessage(requestId, GET_PROPERTY_LIST, AMSI, RENTROLL,xmlString, RequestStatus.SUCCESS);
+			} catch (Exception e) {
+				auditService.saveRequestMessage(requestId, GET_PROPERTY_LIST, AMSI, RENTROLL,e.getMessage(), RequestStatus.FAILED);
+				auditService.updateRequest(requestId, RequestStatus.FAILED);
+				log.error("Exception in GET_PROPERTY_LIST ", e);
+				throw e;
+			}
+        	
+			return xmlString;
+        	
+        }
+        
+        private void  getPropertyUnits(long requestId, String propertyId, VendorRequestParams vendorRequestParams) throws JsonProcessingException{
+        	
+        	auditService.saveRequestMessage(requestId, GET_PROPERTY_UNITS, RENTROLL, AMSI,jsonUtils.getJsonString(vendorRequestParams) + PROPERTY + propertyId,RequestStatus.SUCCESS);    								
+			try {
+				String xmlStr = amsiservice.getPropertyUnits( vendorRequestParams.getLoginId(),vendorRequestParams.getPasword(), vendorRequestParams.getVendorDatabase(), propertyId);
+
+				auditService.saveRequestMessage(requestId, GET_PROPERTY_UNITS, AMSI,RENTROLL, xmlStr, RequestStatus.SUCCESS);
+			} catch (Exception e) {
+				auditService.saveRequestMessage(requestId, GET_PROPERTY_UNITS, AMSI,RENTROLL, e.getMessage(), RequestStatus.FAILED);
+				auditService.updateRequest(requestId, RequestStatus.FAILED);
+					log.error("Exception in GET_PROPERTY_UNITS ", e);
+					throw e;
+			} 
+        	
+        }
+        
+        private void  getPropertyResidents(long requestId, String propertyId, VendorRequestParams vendorRequestParams) throws JsonProcessingException{
+
+        	auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS, RENTROLL, AMSI,jsonUtils.getJsonString(vendorRequestParams) + PROPERTY + propertyId,
+					RequestStatus.SUCCESS);    								
+			try {
+				String xmlStr = amsiservice.getPropertyResidents( vendorRequestParams.getLoginId(),vendorRequestParams.getPasword(), vendorRequestParams.getVendorDatabase(), propertyId);
+				auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS, AMSI,RENTROLL, xmlStr, RequestStatus.SUCCESS);
+			} catch (Exception e) {
+				auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS, AMSI,RENTROLL, e.getMessage(), RequestStatus.FAILED);
+				auditService.updateRequest(requestId, RequestStatus.FAILED);          	        					
+				log.error("Exception in GET_PROPERTY_RESIDENTS ", e);
+				throw e;
+
+			}
+        }
+        
+        private void  getResidentsByStatusChangeOrTransactionDateForResidents(long requestId, String propertyId, VendorRequestParams vendorRequestParams) throws JsonProcessingException{
+        	auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_STATUS_CHANGE_TRAN_DATE, RENTROLL, AMSI,jsonUtils.getJsonString(vendorRequestParams) + PROPERTY + propertyId,RequestStatus.SUCCESS);  
+        	auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_TRAN_DATE, RENTROLL, AMSI,jsonUtils.getJsonString(vendorRequestParams) + PROPERTY + propertyId,RequestStatus.SUCCESS);
+        	try {
+        		String xmlStr = amsiservice.getResidentsByStatusChangeOrTransactionDateForResidents( vendorRequestParams.getLoginId(),vendorRequestParams.getPasword(), vendorRequestParams.getVendorDatabase(), propertyId);
+
+        		auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_STATUS_CHANGE_TRAN_DATE, AMSI,RENTROLL, xmlStr, RequestStatus.SUCCESS);
+        		String xmlStrRes = amsiservice.getResidentsByStatusTransactionDateForResidents( vendorRequestParams.getLoginId(),vendorRequestParams.getPasword(), vendorRequestParams.getVendorDatabase(), propertyId);
+
+        		auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_TRAN_DATE, AMSI,RENTROLL, xmlStrRes, RequestStatus.SUCCESS);
         	} catch (Exception e) {
-        		log.error("Error running the AMSI Sheduled job", e);
+        		auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_STATUS_CHANGE_TRAN_DATE, AMSI,RENTROLL, e.getMessage(), RequestStatus.FAILED);
+        		auditService.updateRequest(requestId, RequestStatus.FAILED);
+        		auditService.saveRequestMessage(requestId, GET_PROPERTY_RESIDENTS_BY_TRAN_DATE, AMSI,RENTROLL, e.getMessage(), RequestStatus.FAILED);
+        		auditService.updateRequest(requestId, RequestStatus.FAILED);        								
+        		log.error("Exception in GET_PROPERTY_RESIDENTS_BY_STATUS_CHANGE_TRAN_DATE ", e);
+        		throw e;
+
         	}
-
-
-
 
         }
     }
