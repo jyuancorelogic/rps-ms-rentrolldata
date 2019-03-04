@@ -11,9 +11,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import lombok.extern.log4j.Log4j2;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -22,9 +22,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-/**
- * Created by 675321 on 2/6/2019.
- */
+
 
     @Component
     @Log4j2
@@ -52,35 +50,31 @@ import org.w3c.dom.NodeList;
         @Scheduled(cron = "${amsi.cronExpression}")
         public void getAmsiRentRollData() throws JsonProcessingException {
         	log.info("Sheduled job for AMSI Rentroll started");
+        	try {
         	List<VendorRequestParams> vendorRequestParamsList = vendorRequestService.getVendorRequestData(AMSI);
-        	try{
-        		vendorRequestParamsList.forEach(vendorRequestParams -> {
-        			long requestId = auditService.saveRequest(vendorRequestParams.getVendorParamsId().getVendor(),vendorRequestParams.getVendorParamsId().getFurnisher(), RequestStatus.IN_PROGRESS);
-        			try {
-        				String xmlString=getPropertyList(requestId,vendorRequestParams);
-        				Document	document=AMSIUtil.convertStringToDocument(xmlString);
-        				Node node = document.getDocumentElement();
-        				NodeList nodeList = node.getChildNodes();
-        				for (int i = 0; i < nodeList.getLength(); i++) {
-        					Node currentNode = nodeList.item(i);
-        					if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
-        						Element el = (Element) currentNode;
-        						String prop = el.getElementsByTagName("PropertyId").item(0).getTextContent();
-        						if (StringUtils.isNotBlank(prop)) {
-        							getPropertyUnits(requestId,prop,vendorRequestParams);
-        							getPropertyResidents(requestId,prop,vendorRequestParams);
-        							getResidentsByStatusChangeOrTransactionDateForResidents(requestId,prop,vendorRequestParams);						
-        						}
-        					}
+        	vendorRequestParamsList.forEach(vendorRequestParams -> {
+        		long requestId = auditService.saveRequest(vendorRequestParams.getVendorParamsId().getVendor(),vendorRequestParams.getVendorParamsId().getFurnisher(), RequestStatus.IN_PROGRESS);
+        		try {
+        			String xmlString=getPropertyList(requestId,vendorRequestParams);
+        			List<String> propertylist=getPopertyListfromDocument(xmlString);
+        			propertylist.forEach(propertyId ->{
+        				try {
+        					getPropertyUnits(requestId,propertyId,vendorRequestParams);
+        					getPropertyResidents(requestId,propertyId,vendorRequestParams);
+        					getResidentsByStatusChangeOrTransactionDateForResidents(requestId,propertyId,vendorRequestParams);	
+        				} catch (JsonProcessingException e) {
+        					log.error("Error retrieving amsi rent roll data", e);
         				}
-        			} catch (Exception ex) {
-        				log.error("Error retrieving amsi rent roll data", ex);
-        				auditService.updateRequest(requestId, RequestStatus.FAILED);
-        			}
-        		});
-        	}catch (Exception e) {
-    			log.error("Error running the AMSI Sheduled job", e);
-    		}
+        			});
+
+        		} catch (Exception ex) {
+        			log.error("Error retrieving amsi rent roll data", ex);
+        			auditService.updateRequest(requestId, RequestStatus.FAILED);
+
+        		}
+        	});} catch (Exception e) {
+        		log.error("Error running the AMSI Sheduled job", e);
+        	}
 
         }
         
@@ -97,7 +91,7 @@ import org.w3c.dom.NodeList;
 				log.error("Exception in GET_PROPERTY_LIST ", e);
 				throw e;
 			}
-        	
+
 			return xmlString;
         	
         }
@@ -154,5 +148,23 @@ import org.w3c.dom.NodeList;
 
         	}
 
+        }
+        
+        private List<String> getPopertyListfromDocument(String xml){
+        	Document	document=AMSIUtil.convertStringToDocument(xml);
+        	Node node = document.getDocumentElement();
+        	NodeList nodeList = node.getChildNodes();
+        	List<String> propertylist=new ArrayList<String>();
+        	for (int i = 0; i < nodeList.getLength(); i++) {
+        		Node currentNode = nodeList.item(i);
+        		if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
+        			Element el = (Element) currentNode;
+        			String prop = el.getElementsByTagName("PropertyId").item(0).getTextContent();
+        			propertylist.add(prop);
+        		}
+        	}
+        	
+        	return propertylist;
+  
         }
     }
