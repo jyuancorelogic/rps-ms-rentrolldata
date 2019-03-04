@@ -10,11 +10,11 @@ import com.corelogic.rps.rentrolldata.audit.data.RequestStatus;
 import com.corelogic.rps.rentrolldata.audit.repository.AuditRequestMessageRepository;
 import com.corelogic.rps.rentrolldata.audit.repository.AuditRequestRepository;
 
-import lombok.extern.log4j.Log4j2;
+
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-@Log4j2
+
 @Service
 public class AuditService {
 

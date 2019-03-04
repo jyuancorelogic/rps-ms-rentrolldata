@@ -53,7 +53,6 @@ public class AmsiControllerTest {
         when(jsonUtils.getJsonString(any())).thenReturn("getJsonStringResponse");
         when(vendorRequestService.getVendorRequestData(anyString())).thenReturn(Arrays.<VendorRequestParams>asList(new VendorRequestParams(null, "WEBSERVICE", url, fasrclk, fasrclk, "SQlSERVER", "server", esiteclk, "platform", "licence", "unitStatus", "dBLive", "lastUpdateUser", LocalDateTime.of(2019, Month.FEBRUARY, 13, 11, 43, 7))));
 
-        amsiController.getAmsiRentRollData();
     }
 }
 
