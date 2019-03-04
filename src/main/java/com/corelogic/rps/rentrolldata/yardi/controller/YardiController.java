@@ -47,7 +47,6 @@ public class YardiController {
 	@Scheduled(cron = "${yardi.cronExpression}")
 	public void getYardiRentRollData()throws JsonProcessingException {
 		log.info("Sheduled job for Yardi Rentroll started");
-		try {
 			List<VendorRequestParams> vendorRequestParamsList = vendorRequestService.getVendorRequestData(YARDI);
 			vendorRequestParamsList.forEach(vendorRequestParams -> {
 				long requestId = auditService.saveRequest(vendorRequestParams.getVendorParamsId().getVendor(),
@@ -58,22 +57,20 @@ public class YardiController {
 						propertylist.forEach(propertyId ->{
 							try{
 								  getYardiUnitConfiguration( requestId,  propertyId,  vendorRequestParams);
-							}catch (Exception e){
+							}catch (JsonProcessingException e){
 								log.error("Exception running the Yardi Sheduled job", e);
 							}
 								
 						});
 
-				} catch (Exception ex) {
+				} catch (JsonProcessingException ex) {
 
 						log.error("Error retrieving rent Yardi roll data for the furnisher ID",ex);
 
 					auditService.updateRequest(requestId, RequestStatus.FAILED);
 				}
 			});
-		} catch (Exception e) {
-			log.error("Error running the Yardi Sheduled job", e);
-		}
+		
 		log.info("Sheduled job for Yardi Rentroll ended");
 	}
 	
@@ -81,56 +78,26 @@ public class YardiController {
 		
 		Document document = null;
 		String xmlString = null;
-		try {
 			auditService.saveRequestMessage(requestId, GET_PROPERTY_CONFIGURATIONS, RENTROLL, YARDI,
 					jsonUtils.getJsonString(vendorRequestParams), RequestStatus.SUCCESS);
-			document = yardiService.getYardiProperties(vendorRequestParams.getLoginId(),
-					vendorRequestParams.getPasword(), vendorRequestParams.getServer(),
-					vendorRequestParams.getVendorDatabase(), vendorRequestParams.getPlatform(),
-					vendorRequestParams.getEntity(), vendorRequestParams.getLicence(),
-					vendorRequestParams.getVendorServiceURL());
+			document = yardiService.getYardiProperties(vendorRequestParams);
 			xmlString = YardiUtils.convertDocumentToString(document);
 			auditService.saveRequestMessage(requestId, GET_PROPERTY_CONFIGURATIONS, YARDI, RENTROLL,
 					xmlString, RequestStatus.SUCCESS);
-		} catch (Exception e) {
-			auditService.saveRequestMessage(requestId, GET_PROPERTY_CONFIGURATIONS, YARDI, RENTROLL,
-					e.getMessage(), RequestStatus.FAILED);
-			auditService.updateRequest(requestId, RequestStatus.FAILED);				
-				log.error("Exception in GET_PROPERTY_CONFIGURATIONS ", e);
-				throw e;
-		
-		}
-		
+				
 		return document;
 		
 	}
 	private   void getYardiUnitConfiguration(long requestId, String prop, VendorRequestParams vendorRequestParams)throws JsonProcessingException{
-
-		try {
 			auditService.saveRequestMessage(requestId, GET_UNIT_CONFIGURATIONS, RENTROLL, YARDI,jsonUtils.getJsonString(vendorRequestParams) + "Property:" + prop,RequestStatus.SUCCESS);
-			Document document = yardiService.getYardiUnitConfiguration(vendorRequestParams.getLoginId(),
-					vendorRequestParams.getPasword(), vendorRequestParams.getServer(),
-					vendorRequestParams.getVendorDatabase(), vendorRequestParams.getPlatform(),
-					vendorRequestParams.getEntity(), vendorRequestParams.getLicence(),
-					vendorRequestParams.getVendorServiceURL(), prop);
+			Document document = yardiService.getYardiUnitConfiguration(vendorRequestParams, prop);
 			String propXmlString = YardiUtils.convertDocumentToString(document);
 			auditService.saveRequestMessage(requestId, GET_UNIT_CONFIGURATIONS, YARDI,
 					RENTROLL, propXmlString, RequestStatus.SUCCESS);
-			
-		} catch (Exception e) {
-			auditService.saveRequestMessage(requestId, GET_UNIT_CONFIGURATIONS, YARDI,
-					RENTROLL, e.getMessage(), RequestStatus.FAILED);
-			auditService.updateRequest(requestId, RequestStatus.FAILED);									
-			log.error("Exception in GET_UNIT_CONFIGURATIONS ", e);
-			throw e;
-
-		}
-
-
 	}
 	
 	private List<String> getYardiPopertyListfromDocument(Document document){
-    	List<String> propertylist=new ArrayList<String>();
+    	List<String> propertylist=new ArrayList<>();
     	Node node = document.getDocumentElement();
 		NodeList nodeList = node.getChildNodes();
 		for (int i = 0; i < nodeList.getLength(); i++) {
